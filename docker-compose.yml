@@ -33,7 +33,7 @@ services:
     networks:
       - site-lvcshu
     environment:
-      MYSQL_ROOT_PASSWORD:
+
 
 networks:
   site-lvcshu:

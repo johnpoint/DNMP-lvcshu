@@ -54,46 +54,8 @@ install(){
   curl  https://get.acme.sh | sh
   echo -e "输入mysql密码:"
   read password
-  echo "version: \"3.1\"
-
-  services:
-    web:
-      image: johnpoint/nginx-lvcshu
-      container_name: nginx
-      ports:
-        - \"80:80\"
-        - \"443:443\"
-      networks:
-        - site-lvcshu
-      volumes:
-        - /web/vhost:/web/vhost
-        - /web/conf:/etc/nginx/conf.d
-        - /root/.acme.sh:/web/ssl
-
-    php-fpm:
-      image: johnpoint/php-lvcshu:latest
-      container_name: php-fpm
-      ports:
-        - \"9000:9000\"
-      networks:
-        - site-lvcshu
-      volumes:
-        - /web/vhost:/web/vhost
-
-    mysql:
-      image: mysql:latest
-      container_name: mysql
-      command: --default-authentication-plugin=mysql_native_password
-      ports:
-        - \"3306:3306\"
-      networks:
-        - site-lvcshu
-      environment:
-        MYSQL_ROOT_PASSWORD:${password}
-
-  networks:
-    site-lvcshu:
-" > docker-compose.yml
+  wget https://git.lvcshu.com/johnpoint/DNMP-lvcshu/raw/master/docker-compose.yml
+  sed -e 36a\ "      MYSQL_ROOT_PASSWORD: ${password}" docker-compose.yml
   docker-compose up -d
 }
 
