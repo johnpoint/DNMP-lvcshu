@@ -53,7 +53,6 @@ install(){
   mkdir /web/vhost /web/conf -p
   curl  https://get.acme.sh | sh
   wget https://git.lvcshu.com/johnpoint/DNMP-lvcshu/raw/master/docker-compose.yml
-  sed -i 's/*/DNMP-lvcshu/g' docker-compose.yml
   docker-compose up -d
 }
 

@@ -32,8 +32,8 @@ services:
       - "3306:3306"
     networks:
       - site-lvcshu
-    environment: *
-
+    environment:
+      MYSQL_ROOT_PASSWORD: DNMP-lvcshu
 
 networks:
   site-lvcshu:
