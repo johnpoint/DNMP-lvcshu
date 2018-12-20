@@ -43,7 +43,7 @@ install(){
 "
   $PM update -y
   $PM upgrade
-  $PM install curl -y
+  $PM install curl unzip -y
   curl -fsSL get.docker.com -o get-docker.sh
   sh get-docker.sh --mirror Aliyun
   systemctl enable docker
@@ -52,10 +52,8 @@ install(){
   chmod +x /usr/local/bin/docker-compose
   mkdir /web/vhost /web/conf -p
   curl  https://get.acme.sh | sh
-  echo -e "输入mysql密码:"
-  read password
   wget https://git.lvcshu.com/johnpoint/DNMP-lvcshu/raw/master/docker-compose.yml
-  sed -i 's/*/${password}/g' docker-compose.yml
+  sed -i 's/*/DNMP-lvcshu/g' docker-compose.yml
   docker-compose up -d
 }
 
