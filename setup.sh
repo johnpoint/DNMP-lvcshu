@@ -143,7 +143,7 @@ make_config(){
           location ~ \.php$ {
               fastcgi_pass   php-fpm:9000;
               fastcgi_index  index.php;
-              fastcgi_param  SCRIPT_FILENAME  /web/vhost/${dom}$fastcgi_script_name;
+              fastcgi_param  SCRIPT_FILENAME  /web/vhost/${dom}\$fastcgi_script_name;
               include        fastcgi_params;
           }
 
@@ -200,7 +200,7 @@ ssl_config(){
           location ~ \.php$ {
               fastcgi_pass   php-fpm:9000;
               fastcgi_index  index.php;
-              fastcgi_param  SCRIPT_FILENAME  /web/vhost/${dom}$fastcgi_script_name;
+              fastcgi_param  SCRIPT_FILENAME  /web/vhost/${dom}\$fastcgi_script_name;
               include        fastcgi_params;
           }
 
