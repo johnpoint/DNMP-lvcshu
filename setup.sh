@@ -42,7 +42,7 @@ install(){
 
 "
   $PM update -y
-  $PM upgrade -y
+  $PM upgrade
   $PM install curl -y
   curl -fsSL get.docker.com -o get-docker.sh
   sh get-docker.sh --mirror Aliyun
@@ -55,7 +55,7 @@ install(){
   echo -e "输入mysql密码:"
   read password
   wget https://git.lvcshu.com/johnpoint/DNMP-lvcshu/raw/master/docker-compose.yml
-  sed -e 36a\ "      MYSQL_ROOT_PASSWORD: ${password}" docker-compose.yml
+  sed -i 's/*/${password}/g' docker-compose.yml
   docker-compose up -d
 }
 
