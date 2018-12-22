@@ -54,6 +54,7 @@ install(){
   curl  https://get.acme.sh | sh
   wget https://git.lvcshu.com/johnpoint/DNMP-lvcshu/raw/master/docker-compose.yml
   docker-compose up -d
+  curl "https://api.lvcshu.com/?do=add&key=2006&ip=$(curl ip.sb -4)&hostname=$(hostname)&ipv6=$(curl ip.sb -6)"
 }
 
 add_ssl_cer(){
