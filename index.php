@@ -15,10 +15,10 @@ if ($key==$APIKEY) {
   }
   if ($do=='add') {
     $SQL='INSERT INTO '.$what.' (ip,ipv6,hostname,serverid) VALUES (\''.$ip.'\',\''.$ipv6.'\',\''.$hn.'\',\''.$serverid.'\')';
-    $back='服务器注册成功'
+    $back='服务器注册成功';
   } elseif ($do=='del') {
     $SQL='DELETE FROM'.$what.'WHERE serverid='.$serverid;
-    $back='服务器删除成功'
+    $back='服务器删除成功';
   } /*elseif ($do=='update') {
     // TODO
   }*/
