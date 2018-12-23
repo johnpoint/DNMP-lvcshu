@@ -6,22 +6,27 @@ $ip=$_GET['ip'];
 $ipv6=$_GET['ipv6'];
 $hn=$_GET['hostname'];
 $serverid=$_GET['serverid'];
+$table=$_GET['table'];
 
 if ($key==$APIKEY) {
-  if ($do=='add') {
-    $conn = new mysqli($DBhost, $DBusername, $DBpassword, $DBname);
-    if ($conn->connect_error) {
-        die("连接失败: " . $conn->connect_error);
-    }
-    $SQL='INSERT INTO servers (ip,ipv6,hostname,serverid) VALUES (\''.$ip.'\',\''.$ipv6.'\',\''.$hn.'\',\''.$serverid.'\')';
-    if ($conn->query($SQL) === TRUE) {
-        echo "服务器注册成功！";
-    } else {
-        echo "Error: " . $SQL . "<br>" . $conn->error;
-    }
-    $conn->close();
+  $conn = new mysqli($DBhost, $DBusername, $DBpassword, $DBname);
+  if ($conn->connect_error) {
+      die("连接失败: " . $conn->connect_error);
   }
+  if ($do=='add') {
+    $SQL='INSERT INTO'.$table.'(ip,ipv6,hostname,serverid) VALUES (\''.$ip.'\',\''.$ipv6.'\',\''.$hn.'\',\''.$serverid.'\')';
+  } elseif ($do=='del') {
+    $SQL='DELETE FROM'.$table.'WHERE serverid='.$serverid;
+  } /*elseif ($do=='update') {
+    // TODO
+  }*/
+  if ($conn->query($SQL) === TRUE) {
+      echo "{\"code\":\"200\"}";
+  } else {
+      echo "{\"code\":\"423\",\"message\":\"".$conn->error."\"}";
+  }
+  $conn->close();
 } else {
-  echo 'api key 错误，无法进行操作 ！';
+  echo "{\"code\":\"403\"}";
 }
  ?>
