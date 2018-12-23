@@ -6,7 +6,7 @@ $ip=$_GET['ip'];
 $ipv6=$_GET['ipv6'];
 $hn=$_GET['hostname'];
 $serverid=$_GET['serverid'];
-$table=$_GET['table'];
+$what=$_GET['table'];
 
 if ($key==$APIKEY) {
   $conn = new mysqli($DBhost, $DBusername, $DBpassword, $DBname);
