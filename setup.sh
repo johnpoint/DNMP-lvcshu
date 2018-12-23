@@ -41,6 +41,7 @@ install(){
 |____/|_| \_|_|  |_|_|        |_| \_/ \___|___/_| |_|\__,_|
 
 "
+  read -p "输入api key" key
   $PM update -y
   $PM upgrade
   $PM install curl unzip -y
@@ -54,7 +55,7 @@ install(){
   curl  https://get.acme.sh | sh
   wget https://git.lvcshu.com/johnpoint/DNMP-lvcshu/raw/master/docker-compose.yml
   docker-compose up -d
-  curl "https://api.lvcshu.com/?do=add&key=2006&ip=$(curl ip.sb -4)&hostname=$(hostname)&ipv6=$(curl ip.sb -6)&serverid=$(cat /proc/sys/kernel/random/uuid)&what=servers"
+  curl "https://api.lvcshu.com/?do=add&key=${key}&ip=$(curl ip.sb -4)&hostname=$(hostname)&ipv6=$(curl ip.sb -6)&serverid=$(cat /proc/sys/kernel/random/uuid)&what=servers"
 }
 
 add_ssl_cer(){
