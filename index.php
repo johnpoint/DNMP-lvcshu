@@ -23,12 +23,4 @@ if ($key==$APIKEY) {
 } else {
   echo 'api key 错误，无法进行操作 ！';
 }
-
-
-
-
-
-
-
-
  ?>

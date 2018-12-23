@@ -76,7 +76,7 @@ install_phpmyadmin(){
   read -p "(默认: google.com)" dom
   if [[ ! -z ${dom} ]];then
     cd /web/vhost/${dom}
-    wget https://files.phpmyadmin.net/phpMyAdmin/4.8.3/phpMyAdmin-4.8.3-all-languages.zip
+    wget https://files.phpmyadmin.net/phpMyAdmin/4.8.4/phpMyAdmin-4.8.4-all-languages.zip
     unzip *.zip
     rm *.zip -f
     mv php* phpmyadmin
