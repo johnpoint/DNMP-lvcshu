@@ -1,4 +1,5 @@
 <?php
+echo '<div class="mdui-panel" mdui-panel>';
 if(is_dir("./data")) {
     //打开目录句柄
     if ($dh = opendir("./data")) {
