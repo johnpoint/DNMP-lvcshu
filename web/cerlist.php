@@ -1,7 +1,4 @@
 <?php
-echo '<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/mdui/0.4.2/css/mdui.min.css">';
-echo '<script src="//cdnjs.cloudflare.com/ajax/libs/mdui/0.4.2/js/mdui.min.js"></script>';
-echo '<div class="mdui-panel mdui-panel-gapless" mdui-panel>';
 if(is_dir("./data")) {
     //打开目录句柄
     if ($dh = opendir("./data")) {
