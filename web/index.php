@@ -4,10 +4,16 @@ include_once 'header.php';
 include_once 'sidebar.php';
 //main
 $page=$_GET['page'];
-if ($page == '') {
-  $page='main';
+
+if ($_COOKIE["user"] == ''){
+  $page = 'login';
+}elseif ($_COOKIE["user"] == $usercookie) {
+  if ($page == '') {
+    $page='main';
+  }
+}else{
+  $page = 'login';
 }
 include_once $page.'.php';
-
 include_once 'footer.php';
  ?>

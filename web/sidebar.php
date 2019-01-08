@@ -21,6 +21,7 @@ echo '  <div class="mdui-drawer" id="main-drawer">
         <div class="mdui-collapse-item-body mdui-list">
           <a href="?page=settings" class="mdui-list-item mdui-ripple ">设置</a>
           <a href="?page=about" class="mdui-list-item mdui-ripple ">关于</a>
+          <a href="/loginout.php" class="mdui-list-item mdui-ripple id="loginout"">退出</a>
         </div>
       </div>
     </div>
