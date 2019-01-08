@@ -12,7 +12,7 @@ services:
     volumes:
       - /web/vhost:/web/vhost
       - /web/conf:/etc/nginx/conf.d
-      - /root/.acme.sh:/web/ssl
+      - /web/ssl:/web/ssl
 
   php-fpm:
     image:                 johnpoint/php-lvcshu:latest
