@@ -25,14 +25,7 @@ do
   echo "签发机构: "${data##* issuer: } >> "data/$line"
 
   data=$(cat "data/$line.ca" | grep 'SSL certificate verify ok.')
-
-  if [[ -z $data ]];then
-    echo '<img src="https://img.shields.io/badge/SSL-error-red.svg">' >> "data/$line"
-    rm "data/$line.ca"
-    exit
-  else
-    echo '<img src="https://img.shields.io/badge/SSL-ok-green.svg">' >> "data/$line"
-  fi
+  echo "证书状态: "${data##* } >> "data/$line"
 
   startdate=$(date -d "${startdate}" +%s)
   enddate=$(date -d "${enddate}" +%s)
