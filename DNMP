@@ -137,7 +137,8 @@ add_vhost(){
 }
 
 add_ssl(){
-  ~/.acme.sh/acme.sh  --issue  -d $dom --installcert /web/ssl/$dom --webroot  /web/vhost/$dom
+  ~/.acme.sh/acme.sh  --issue  -d $dom --webroot  /web/vhost/$dom
+  ~/.acme.sh/acme.sh --installcert  -d  $dom --key-file   /web/ssl/$dom/${dom}.key --fullchain-file /web/ssl/$dom/fullchain.cer
 }
 
 make_dir(){
