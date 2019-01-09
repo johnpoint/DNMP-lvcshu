@@ -7,7 +7,7 @@ echo '<div class="mdui-container doc-container doc-no-cover">
     </div>
   </div>
 </div>';
-else {
+}else {
   header("Location: /index.php");
 }
  ?>

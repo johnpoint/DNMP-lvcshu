@@ -8,7 +8,7 @@ if ($_GET['page'] == 'cer') {
   echo '</div>
     </div>
   </div>';
-else {
+} else {
   header("Location: /index.php");
 }
  ?>
