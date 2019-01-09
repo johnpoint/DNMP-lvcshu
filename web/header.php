@@ -1,5 +1,4 @@
 <?php
-include 'checkcookie.php';
 echo '<body class="mdui-drawer-body-left mdui-appbar-with-toolbar  mdui-theme-primary-blue-grey mdui-theme-accent-pink">
 <header class="mdui-appbar mdui-appbar-fixed">
   <div class="mdui-toolbar mdui-color-theme">

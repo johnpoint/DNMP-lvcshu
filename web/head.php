@@ -1,5 +1,4 @@
 <?php
-include 'checkcookie.php';
 echo '<!DOCTYPE html>
 <html>';
 echo '<head>
