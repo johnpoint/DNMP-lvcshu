@@ -1,5 +1,6 @@
 <?php
-if ($_GET['page'] == 'cerlist') {
+include_once 'config.php';
+if ($_COOKIE["user"] == $usercookie) {
     echo '<div class="mdui-panel" mdui-panel>';
     function listDir($dir)
     {
@@ -34,5 +35,5 @@ if ($_GET['page'] == 'cerlist') {
     listDir("./data");
     echo '</div>';
 } else {
-    header("Location: /index.php");
+    echo 'error';
 }
