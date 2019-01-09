@@ -1,6 +1,6 @@
 <?php
 include_once 'config.php';
-if ($_COOKIE["user"] == $usercookie) {
+if ($_COOKIE["user"] == md5($username.$userpasswd)) {
     echo '<div class="mdui-panel" mdui-panel>';
     function listDir($dir)
     {

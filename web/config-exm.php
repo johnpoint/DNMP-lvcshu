@@ -1,3 +1,4 @@
 <?php
-$usercookie='';
+$username='';
+$userpasswd='';
  ?>
