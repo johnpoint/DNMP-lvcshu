@@ -1,5 +1,6 @@
 <?php
-if ($_GET['page'] == 'getcer') {
+include_once 'config.php';
+if ($_COOKIE["user"] == $usercookie) {
     echo '<div class="mdui-panel" mdui-panel>';
     function listDir($dir)
     {
@@ -19,9 +20,9 @@ if ($_GET['page'] == 'getcer') {
                             echo '<div class="mdui-panel-item">';
                             echo '<div class="mdui-panel-item-header">'.'<div class="mdui-panel-item-title">'.$file.'</div>'.'<i class="mdui-panel-item-arrow mdui-icon material-icons">keyboard_arrow_down</i>'.'</div>';
                             echo '<div class="mdui-panel-item-body">';
-                            echo 'wget https://center.lvcshu.com/'.$dir.'/'.$myfile.$file;
+                            echo 'wget https://center.lvcshu.com/getcerfile.php?file='.$dir.'/'.$myfile.$file;
                             echo '<br>';
-                            echo 'curl https://center.lvcshu.com/'.$dir.'/'.$myfile.$file;
+                            echo 'curl https://center.lvcshu.com/getcerfile.php?file='.$dir.'/'.$myfile.$file;
                             echo '</div></div>';
                         }
                     }
