@@ -1,5 +1,6 @@
 <?php
-if ($_GET['page'] == 'status') {
+include_once 'config.php';
+if ($_COOKIE["user"] == $usercookie) {
 echo '<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
 <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap-theme.min.css">
 <link rel="stylesheet" href="css/dark.css" title="dark">
