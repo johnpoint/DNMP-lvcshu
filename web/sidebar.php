@@ -9,7 +9,8 @@ echo '  <div class="mdui-drawer" id="main-drawer">
         </div>
         <div class="mdui-collapse-item-body mdui-list">
           <a href="?page=status" class="mdui-list-item mdui-ripple ">监控</a>
-          <a href="?page=cer" class="mdui-list-item mdui-ripple ">证书</a>
+          <a href="?page=cer" class="mdui-list-item mdui-ripple ">证书检查</a>
+          <a href="?page=getcer" class="mdui-list-item mdui-ripple ">证书分发</a>
         </div>
       </div>
       <div class="mdui-collapse-item mdui-collapse-item-open">

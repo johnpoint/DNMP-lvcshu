@@ -9,7 +9,9 @@ echo '  <div class="mdui-container doc-container doc-no-cover">
         <div class="mdui-col mdui-m-b-1">
           <a href="?page=status" class="mdui-btn mdui-btn-block mdui-text-left mdui-ripple">监控</a></div>
         <div class="mdui-col mdui-m-b-1">
-          <a href="?page=cer" class="mdui-btn mdui-btn-block mdui-text-left mdui-ripple">证书</a></div>
+          <a href="?page=cer" class="mdui-btn mdui-btn-block mdui-text-left mdui-ripple">证书检查</a></div>
+        <div class="mdui-col mdui-m-b-1">
+          <a href="?page=getcer" class="mdui-btn mdui-btn-block mdui-text-left mdui-ripple">证书分发</a></div>
       </div>
       <h4 class="doc-article-title">其他</h4>
     </div>

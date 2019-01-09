@@ -1,5 +1,5 @@
 <?php
-if ($_GET['page'] == 'cerlist') {
+if ($_GET['page'] == 'getcer') {
     echo '<div class="mdui-panel" mdui-panel>';
     function listDir($dir)
     {
@@ -9,19 +9,20 @@ if ($_GET['page'] == 'cerlist') {
                 //从目录句柄中读取条目
                 while (($file = readdir($dh)) !== false) {
                     if (is_dir($dir."/".$file) && $file!="." && $file!="..") {
-                        echo "<b><font color='red'>文件名：</font></b>",$file,"<br><hr>";
-                        listDir($dir."/".$file."/");
+                        echo '<div class="mdui-panel-item">';
+                        echo '<div class="mdui-panel-item-header">'.$file.'</div>';
+                        echo '<div class="mdui-panel-item-body">';
+                        listDir($dir."/".$file);
                     } else {
                         if ($file != "." && $file != "..") {
+                            echo '<div class="mdui-panel" mdui-panel>';
                             echo '<div class="mdui-panel-item">';
                             echo '<div class="mdui-panel-item-header">'.'<div class="mdui-panel-item-title">'.$file.'</div>'.'<i class="mdui-panel-item-arrow mdui-icon material-icons">keyboard_arrow_down</i>'.'</div>';
                             echo '<div class="mdui-panel-item-body">';
-                            $myfile = fopen("$dir/$file", "r") or die("Unable to open file!");
-                            while (!feof($myfile)) {
-                                echo '<p>'.fgets($myfile) . '</p>';
-                            }
+                            echo 'wget https://center.lvcshu.com/'.$dir.'/'.$myfile.$file;
+                            echo '<br>';
+                            echo 'curl https://center.lvcshu.com/'.$dir.'/'.$myfile.$file;
                             echo '</div></div>';
-                            fclose($myfile);
                         }
                     }
                 }
@@ -31,8 +32,8 @@ if ($_GET['page'] == 'cerlist') {
             echo $dir . '<br>';
         }
     }
-    listDir("./data");
-    echo '</div>';
+    listDir("ssl");
+    echo '</div></div></div></div>';
 } else {
     header("Location: /index.php");
 }
