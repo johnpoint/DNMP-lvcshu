@@ -114,8 +114,8 @@ add_vhost(){
     if [[ ${sslyn} == "y"  ]]; then
         echo "1.使用已有证书"
         echo "2.Let签发"
-        read -p ssl12
-        if [[ ${ssl12} == '1' ]]; then
+        read sslyn
+        if [[ ${sslyn} == '1' ]]; then
           read -p "证书路径:(cer)" cerdir
           read -p "私钥路径:(key)" keydir
           cp $cerdir /web/ssl/$dom/fullchain.cer

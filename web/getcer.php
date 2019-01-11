@@ -9,9 +9,7 @@ if ($_COOKIE["user"] == md5($username.$userpasswd)) {
     function listDir($dir,$cookie)
     {
         if (is_dir($dir)) {
-            //打开目录句柄
             if ($dh = opendir($dir)) {
-                //从目录句柄中读取条目
                 while (($file = readdir($dh)) !== false) {
                     if (is_dir($dir."/".$file) && $file!="." && $file!="..") {
                         echo '<div class="mdui-panel-item">';
@@ -24,8 +22,7 @@ if ($_COOKIE["user"] == md5($username.$userpasswd)) {
                             echo '<div class="mdui-panel-item">';
                             echo '<div class="mdui-panel-item-header">'.'<div class="mdui-panel-item-title">'.$file.'</div>'.'<i class="mdui-panel-item-arrow mdui-icon material-icons">keyboard_arrow_down</i>'.'</div>';
                             echo '<div class="mdui-panel-item-body">';
-                            echo '<p> wget https://center.lvcshu.com/getcerfile.php?file='.$dir.'/'.$myfile.$file.' -H \'cookie: user='.$cookie."'".'</p>';
-                            echo '<p> curl https://center.lvcshu.com/getcerfile.php?file='.$dir.'/'.$myfile.$file.' -H \'cookie: user='.$cookie."'".'</p>';
+                            echo '<pre> "curl https://center.lvcshu.com/getcerfile.php?file='.$dir.'/'.$myfile.$file.' -H \'cookie: user='.$cookie."'"." > $file".'"</pre>';
                             echo "<a href=".'\'https://center.lvcshu.com/getcerfile.php?file='.$dir.'/'.$myfile.$file."'".'class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-theme-accent">Download</a>';
                             echo '</div></div>';
                         }
@@ -43,5 +40,6 @@ if ($_COOKIE["user"] == md5($username.$userpasswd)) {
       </div>
     </div>';
 } else {
-    header("Location: /index.php");
+    echo 'error';
 }
+?>
