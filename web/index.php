@@ -8,7 +8,7 @@ $page=$_GET['page'];
 
 if ($_COOKIE["user"] == ''){
   $page = 'login';
-}elseif ($_COOKIE["user"] == $usercookie) {
+}elseif ($_COOKIE["user"] == md5($username.$userpasswd)) {
   if ($page == '') {
     $page='main';
   }
