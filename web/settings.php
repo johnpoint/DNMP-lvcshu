@@ -54,7 +54,6 @@ var a = function() {
     method:"POST",
     data:{mod:"view",name:"usercookie"},
     success:function(data){
-    result = data;
     document.getElementById("cookie").innerHTML = data;
     }})
 };
