@@ -2,7 +2,8 @@
 $username='';
 $userpasswd='';
 $servername='';
-$username='';
-$password='';
+$dbusername='';
+$dbpassword='';
 $dbname='';
+$salt='';
  ?>

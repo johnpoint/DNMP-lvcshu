@@ -2,7 +2,7 @@
 include_once 'config.php';
 if ($_COOKIE["user"] == md5($username.$userpasswd)) {
     // 创建连接
-    $conn = new mysqli($servername, $username, $password, $dbname);
+    $conn = new mysqli($servername, $dbusername, $dbpassword, $dbname);
 
     // 检测连接
     if ($conn->connect_error) {
@@ -10,19 +10,30 @@ if ($_COOKIE["user"] == md5($username.$userpasswd)) {
     }
 
     // 预处理及绑定
-    $select = $conn->prepare("SELECT * FROM settings WHERE name=?");
+    //$select = $conn->prepare("SELECT data FROM settings WHERE name=?");
+    $query = "SELECT data FROM settings WHERE name=";
     $update = $conn->prepare("UPDATE settings SET data=? WHERE name=?");
-    $update->bind_param("ss", $namevalue, $name);
-    $select->bind_param("ss", $name);
 
     if ($_POST['mod'] == 'view') {
       $name=$_POST['name'];
-      $select->execute();
-      $select->close();
-    } elseif ($_POST['edit']) {
+      $query = $query ."'".$name."'" ;
+      //echo $query;
+      $result = $conn->query($query);
+      //$select->bind_param("s", $name);
+      //$result = $select->execute();
+      //echo $result;
+      $row = mysqli_fetch_assoc($result);
+      echo $row["data"];
+      //$select->close();
+    } elseif ($_POST['mod'] == 'update') {
       $name=$_POST['name'];
-      $namevalue=$_POST['value'];
-      $update->execute();
+      if ($_POST['do'] == 'md5') {
+        $value=md5($_POST['username'].$_POST['userpasswd']);
+      } else {
+        $value=$_POST['value'];
+      }
+      $update->bind_param("ss", $value, $name);
+      echo $update->execute();
       $update->close();
     }
     $conn->close();

@@ -17,6 +17,8 @@ echo '  <div class="mdui-container doc-container doc-no-cover">
     </div>
     <div class="mdui-row-xs-1 mdui-row-sm-2 mdui-row-md-3 mdui-row-lg-4">
       <div class="mdui-col mdui-m-b-1">
+        <a href="?page=tool" class="mdui-btn mdui-btn-block mdui-text-left mdui-ripple">常用工具</a></div>
+      <div class="mdui-col mdui-m-b-1">
         <a href="?page=settings" class="mdui-btn mdui-btn-block mdui-text-left mdui-ripple">设置</a></div>
       <div class="mdui-col mdui-m-b-1">
         <a href="?page=about" class="mdui-btn mdui-btn-block mdui-text-left mdui-ripple">关于</a></div>

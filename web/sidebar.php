@@ -20,6 +20,7 @@ echo '  <div class="mdui-drawer" id="main-drawer">
           <i class="mdui-collapse-item-arrow mdui-icon material-icons">keyboard_arrow_down</i>
         </div>
         <div class="mdui-collapse-item-body mdui-list">
+          <a href="?page=tool" class="mdui-list-item mdui-ripple ">常用工具</a>
           <a href="?page=settings" class="mdui-list-item mdui-ripple ">设置</a>
           <a href="?page=about" class="mdui-list-item mdui-ripple ">关于</a>
           <a href="/loginout.php" class="mdui-list-item mdui-ripple id="loginout"">退出</a>
