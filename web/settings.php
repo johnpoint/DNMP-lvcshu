@@ -5,13 +5,13 @@ if ( $vcode == 1) {
     echo '<div class="mdui-container doc-container doc-no-cover">
   <h1 class="doc-title mdui-text-color-theme">服务器管理面板 - 设置</h1>
   <div class="doc-chapter">
-    <div class="mdui-typo">';
-    echo '<div class="mdui-panel" mdui-panel>';
-    echo '<div class="mdui-panel-item">';
-    echo '<div class="mdui-panel-item-header">唯一令牌</div>';
-    echo '<div class="mdui-panel-item-body">';
-    echo '<code id=\'cookie\'></code>';
-    echo '<div class="mdui-panel-item-actions">
+    <div class="mdui-typo">
+    <div class="mdui-panel" mdui-panel>
+    <div class="mdui-panel-item">
+    <div class="mdui-panel-item-header">唯一令牌</div>
+<div class="mdui-panel-item-body">
+<code id=\'cookie\'></code>
+<div class="mdui-panel-item-actions">
         <button class="mdui-btn mdui-color-theme-accent mdui-ripple" id="openedit">edit</button>
       </div>
 
@@ -41,10 +41,10 @@ if ( $vcode == 1) {
     <div class="mdui-dialog-actions">
       <a href="/" class="mdui-btn mdui-ripple" mdui-dialog-confirm>OK</a>
     </div>
-  </div>';
-    echo '</div>';
-    echo '</div>';
-    echo '</div>
+  </div>
+</div>
+</div>
+</div>
   </div>
 </div>
 <script type="text/javascript">
