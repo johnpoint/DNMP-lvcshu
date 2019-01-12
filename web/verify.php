@@ -11,6 +11,14 @@ $row = mysqli_fetch_assoc($result);
 if ($_COOKIE['user'] == $row["data"]) {
   $vcode = 1;
 } else {
-  exit;
+  echo '<script type="text/javascript">
+function error(){
+  mdui.snackbar({
+    message: \'尚未登陆\',
+    position: \'top\'
+  });
+};
+error();
+</script>';
 }
  ?>
