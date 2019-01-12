@@ -35,9 +35,11 @@ if ( $vcode == 1) {
       </div>
       </div>
 
+
+
     <div class="mdui-dialog" id="goodnew">
     <div class="mdui-dialog-title">Success!</div>
-    <div class="mdui-dialog-content">令牌已经更改</div>
+    <div class="mdui-dialog-content">操作完成</div>
     <div class="mdui-dialog-actions">
       <button href="/" class="mdui-btn mdui-ripple" id="okbutton" mdui-dialog-confirm>OK</button>
     </div>
@@ -45,8 +47,36 @@ if ( $vcode == 1) {
 </div>
 </div>
 </div>
+<div class="mdui-panel" mdui-panel>
+<div class="mdui-panel-item">
+<div class="mdui-panel-item-header">授权码</div>
+<div class="mdui-panel-item-body">
+<p id=\'onepass\'></p>
+<div class="mdui-panel-item-actions">
+    <button class="mdui-btn mdui-color-theme-accent mdui-ripple" id="addonepassb">add</button>
+  </div>
   </div>
 </div>
+<div class="mdui-dialog" id="addonepassw">
+<div class="mdui-dialog-title">添加授权码</div>
+<div class="mdui-dialog-content">
+<p>授权码由授权码以及校验码组成</p>
+<form>
+<div class="mdui-textfield mdui-textfield-floating-label">
+<label class="mdui-textfield-label">校验码</label>
+<input class="mdui-textfield-input" type="text" id="addonepassv"/>
+</div>
+<div class="mdui-textfield mdui-textfield-floating-label">
+<label class="mdui-textfield-label">授权码</label>
+<input class="mdui-textfield-input" type="text" id="addonepass"/>
+</div>
+</form>
+<div class="mdui-dialog-actions">
+<button class="mdui-btn mdui-ripple" id="saveonepass">save</button>
+</div>
+</div>
+</div>
+
 <script type="text/javascript">
 var a = function() {
 	$.ajax({
@@ -57,13 +87,29 @@ var a = function() {
     document.getElementById("cookie").innerHTML = data;
     }})
 };
+var b = function() {
+	$.ajax({
+    url: "db.php",
+    method:"POST",
+    data:{mod:"view",name:"onepass"},
+    success:function(data){
+    document.getElementById("onepass").innerHTML = data;
+    }})
+};
 a();
+b();
+function c(){
+  document.getElementById("cookie").innerHTML = \'请重新登陆\';
+};
 var edit = new mdui.Dialog(\'#editcookie\');
 var inst = new mdui.Dialog(\'#goodnew\');
+var onpass = new mdui.Dialog(\'#addonepassw\');
 document.getElementById("openedit").onclick = function(){
   edit.open();
 }
-
+document.getElementById("addonepassb").onclick = function(){
+  onpass.open();
+}
 document.getElementById("saveedit").onclick = function(){
   $.ajax({
     url: "db.php",
@@ -72,13 +118,24 @@ document.getElementById("saveedit").onclick = function(){
     success: function(){
       edit.close();
       inst.open();
+      c();
+    }
+  });
+};
+document.getElementById("saveonepass").onclick = function(){
+  $.ajax({
+    url: "db.php",
+    method:"POST",
+    data:{mod:"add",name: "onepass",data1: document.getElementById("addonepassv").value ,data2: document.getElementById("addonepass").value},
+    success: function(){
+      onpass.close();
+      inst.open();
+      b();
     }
   });
 };
 
-document.getElementById("okbutton").onclick = function(){
-  document.getElementById("cookie").innerHTML = \'请重新登陆\';
-};
+
 
 </script>';
 

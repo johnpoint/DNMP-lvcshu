@@ -12,8 +12,9 @@ if ( $vcode == 1) {
 
     // 预处理及绑定
     //$select = $conn->prepare("SELECT data FROM settings WHERE name=?");
-    $query = "SELECT data FROM settings WHERE name=";
+    $query = "SELECT * FROM settings WHERE name=";
     $update = $conn->prepare("UPDATE settings SET data=? WHERE name=?");
+    $insert = $conn->prepare("INSERT INTO settings (name,data,data2) VALUES (?,?,?)");
 
     if ($_POST['mod'] == 'view') {
       $name=$_POST['name'];
@@ -23,8 +24,17 @@ if ( $vcode == 1) {
       //$select->bind_param("s", $name);
       //$result = $select->execute();
       //echo $result;
-      $row = mysqli_fetch_assoc($result);
-      echo $row["data"];
+      if ($result->num_rows > 0) {
+        while($row = $result->fetch_assoc()) {
+          if ($row['data2'] != '') {
+            echo $row["data"].'  /  '.$row["data2"].'<br>';
+          } else {
+            echo $row['data'];
+          }
+        }
+      } else {
+        echo "0";
+      }
       //$select->close();
     } elseif ($_POST['mod'] == 'update') {
       $name=$_POST['name'];
@@ -36,6 +46,10 @@ if ( $vcode == 1) {
       $update->bind_param("ss", $value, $name);
       echo $update->execute();
       $update->close();
+    } elseif ($_POST['mod'] == 'add') {
+      $insert->bind_param("sss", $_POST['name'], $_POST['data1'], $_POST['data2']);
+      echo $insert->execute();
+      $insert->close();
     }
     $conn->close();
 } else {
