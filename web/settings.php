@@ -8,7 +8,7 @@ if ( $vcode == 1) {
     <div class="mdui-typo">
     <div class="mdui-panel" mdui-panel>
     <div class="mdui-panel-item">
-    <div class="mdui-panel-item-header">唯一令牌</div>
+    <div class="mdui-panel-item-header">登陆令牌</div>
 <div class="mdui-panel-item-body">
 <code id=\'cookie\'></code>
 <div class="mdui-panel-item-actions">

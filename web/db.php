@@ -29,7 +29,7 @@ if ( $vcode == 1) {
     } elseif ($_POST['mod'] == 'update') {
       $name=$_POST['name'];
       if ($_POST['do'] == 'md5') {
-        $value=md5($_POST['username'].$_POST['userpasswd']);
+        $value=md5($_POST['username'].$_POST['userpasswd'].$salt);
       } else {
         $value=$_POST['value'];
       }

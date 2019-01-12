@@ -14,7 +14,7 @@ if ($_COOKIE['user'] == $row["data"]) {
   echo '<script type="text/javascript">
 function error(){
   mdui.snackbar({
-    message: \'尚未登陆\',
+    message: \'用户状态异常\',
     position: \'top\'
   });
 };
