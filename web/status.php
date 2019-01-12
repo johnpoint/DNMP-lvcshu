@@ -1,6 +1,7 @@
 <?php
 include_once 'config.php';
-if ($_COOKIE["user"] == md5($username.$userpasswd)) {
+include_once 'verify.php';
+if ( $vcode == 1) {
 echo '<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
 <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap-theme.min.css">
 <link rel="stylesheet" href="css/dark.css" title="dark">

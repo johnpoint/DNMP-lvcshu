@@ -1,6 +1,7 @@
 <?php
 include_once 'config.php';
-if ($_COOKIE["user"] == md5($username.$userpasswd)) {
+include_once 'verify.php';
+if ( $vcode == 1) {
     // 创建连接
     $conn = new mysqli($servername, $dbusername, $dbpassword, $dbname);
 
