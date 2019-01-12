@@ -21,7 +21,7 @@ if ($_POST['do'] == 'md5') {
   <div class="mdui-typo">';
 
   echo '<div class="mdui-panel" mdui-panel>';
-  echo '<div class="mdui-panel-item mdui-panel-item-open">';
+  echo '<div class="mdui-panel-item  ">';
   echo '<div class="mdui-panel-item-header">MD5 / BASE64</div>';
   echo '<div class="mdui-panel-item-body">';
   echo '<div class="mdui-textfield">
@@ -60,16 +60,16 @@ if ($_POST['do'] == 'md5') {
   </script>';
 
   echo '<div class="mdui-panel" mdui-panel>';
-  echo '<div class="mdui-panel-item mdui-panel-item-open">';
+  echo '<div class="mdui-panel-item  ">';
   echo '<div class="mdui-panel-item-header">UUID</div>';
   echo '<div class="mdui-panel-item-body">';
   echo '
   <code id=\'getuuid\'></code>
   <div class="mdui-panel-item-actions">
       <button class="mdui-btn mdui-color-theme-accent mdui-ripple" id="switch">switch</button>
-    </div>';
+    </div></div></div></div>';
 
-  echo '</div></div></div>
+  echo '
 <script type="text/javascript">
   document.getElementById("switch").onclick = function(){
     $.ajax({
@@ -82,5 +82,33 @@ if ($_POST['do'] == 'md5') {
     });
   };
   </script>';
+
+  echo '<div class="mdui-panel" mdui-panel>';
+  echo '<div class="mdui-panel-item  ">';
+  echo '<div class="mdui-panel-item-header">IP 查询</div>';
+  echo '<div class="mdui-panel-item-body">';
+  echo '<div class="mdui-textfield">
+    <label class="mdui-textfield-label">IP address</label>
+    <input class="mdui-textfield-input" type="text" id="ipaddr"/>
+  </div>
+  <p id="country"></p>
+  <p id="city"></p>
+  <p id="organization"></p>
+  <div class="mdui-panel-item-actions">
+      <button class="mdui-btn mdui-color-theme-accent mdui-ripple" id="getip">GET</button>
+    </div></div></div></div>
+    <script type="text/javascript">
+      document.getElementById("getip").onclick = function(){
+        $.ajax({
+          url: "https://api.ip.sb/geoip/"+document.getElementById("ipaddr").value,
+          method:"GET",
+          success: function(data){
+            document.getElementById("country").innerHTML = "国家: " + data["country"];
+            document.getElementById("city").innerHTML =  "城市: " + data["city"];
+            document.getElementById("organization").innerHTML =  "组织: " + data["organization"];
+          }
+        });
+      };
+    </script>';
 }
  ?>
