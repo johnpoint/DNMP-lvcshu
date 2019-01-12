@@ -1,9 +1,8 @@
 <?php
-$username='';
-$userpasswd='';
 $servername='';
 $dbusername='';
 $dbpassword='';
 $dbname='';
 $salt='';
+$dom='';
  ?>

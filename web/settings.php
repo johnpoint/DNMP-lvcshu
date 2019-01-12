@@ -18,7 +18,7 @@ if ( $vcode == 1) {
       <div class="mdui-dialog" id="editcookie">
     <div class="mdui-dialog-title">更新令牌</div>
     <div class="mdui-dialog-content">
-    <p>令牌与用户名密码生成,更换令牌需更换密码</p>
+    <p>令牌由用户名密码生成,更换令牌需更换密码,并且需要重新登陆</p>
     <form>
     <div class="mdui-textfield mdui-textfield-floating-label">
     <label class="mdui-textfield-label">Username</label>
