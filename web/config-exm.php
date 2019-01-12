@@ -4,5 +4,4 @@ $dbusername='';
 $dbpassword='';
 $dbname='';
 $salt='';
-$dom='';
  ?>

@@ -39,11 +39,8 @@ if ( $vcode == 1) {
     <div class="mdui-dialog-title">Success!</div>
     <div class="mdui-dialog-content">令牌已经更改</div>
     <div class="mdui-dialog-actions">
-      <button class="mdui-btn mdui-ripple" id="ping" mdui-dialog-confirm>OK</button>
+      <a href="/" class="mdui-btn mdui-ripple" mdui-dialog-confirm>OK</a>
     </div>
-
-
-
   </div>';
     echo '</div>';
     echo '</div>';
@@ -80,15 +77,6 @@ document.getElementById("saveedit").onclick = function(){
   });
 };
 
-document.getElementById("ping").onclick = function() {
-	$.ajax({
-    url: "db.php",
-    method:"POST",
-    data:{mod:"view",name:"usercookie"},
-    success:function(data){
-    document.getElementById("cookie").innerHTML = data;
-    }})
-};
 </script>';
 
 } else {
