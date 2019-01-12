@@ -39,7 +39,7 @@ if ( $vcode == 1) {
     <div class="mdui-dialog-title">Success!</div>
     <div class="mdui-dialog-content">令牌已经更改</div>
     <div class="mdui-dialog-actions">
-      <a href="/" class="mdui-btn mdui-ripple" mdui-dialog-confirm>OK</a>
+      <button href="/" class="mdui-btn mdui-ripple" id="okbutton" mdui-dialog-confirm>OK</button>
     </div>
   </div>
 </div>
@@ -75,6 +75,10 @@ document.getElementById("saveedit").onclick = function(){
       inst.open();
     }
   });
+};
+
+document.getElementById("okbutton").onclick = function(){
+  document.getElementById("cookie").innerHTML = \'请重新登陆\';
 };
 
 </script>';
