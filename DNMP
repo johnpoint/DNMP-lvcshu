@@ -154,7 +154,7 @@ make_config(){
       {
           listen 80;
           #listen [::]:80;
-          server_name ZZ ;
+          server_name ${dom} ;
           index index.html index.htm index.php default.html default.htm default.php;
           root  /web/vhost/${dom};
           #return 301 https://${dom}\$request_uri;

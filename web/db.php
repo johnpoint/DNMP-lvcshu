@@ -33,7 +33,7 @@ if ( $vcode == 1) {
           }
         }
       } else {
-        echo "0";
+        echo "0 结果";
       }
       //$select->close();
     } elseif ($_POST['mod'] == 'update') {
