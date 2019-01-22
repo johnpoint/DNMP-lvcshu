@@ -29,6 +29,7 @@ if ( $vcode == 1) {
                         }
                     }
                 }
+                echo '</div>'
                 closedir($dh);
             }
         } else {
