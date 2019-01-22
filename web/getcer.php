@@ -25,10 +25,9 @@ if ( $vcode == 1) {
                             echo '<div class="mdui-panel-item-body">';
                             echo '<pre> curl https://center.lvcshu.com/getcerfile.php?file='.$dir.'/'.$myfile.$file.' -H \'cookie: user='.$_COOKIE["user"]."'"." > $file".'</pre>';
                             echo "<a href=".'\'https://center.lvcshu.com/getcerfile.php?file='.$dir.'/'.$myfile.$file."'".'class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-theme-accent">View</a>';
-                            echo '</div>';
+                            echo '</div></div>';
                         }
                     }
-                    echo '</div>';
                 }
                 echo '</div></div></div>';
                 closedir($dh);
