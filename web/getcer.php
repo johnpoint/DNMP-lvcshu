@@ -19,7 +19,7 @@ if ( $vcode == 1) {
                         listDir($dir."/".$file,$cookie);
                     } else {
                         if ($file != "." && $file != ".." && $file != "synccer.sh") {
-                            echo '<div class="mdui-panel" mdui-panel>';
+                            echo '</div><div class="mdui-panel" mdui-panel>';
                             echo '<div class="mdui-panel-item">';
                             echo '<div class="mdui-panel-item-header">'.'<div class="mdui-panel-item-title">'.$file.'</div>'.'<i class="mdui-panel-item-arrow mdui-icon material-icons">keyboard_arrow_down</i>'.'</div>';
                             echo '<div class="mdui-panel-item-body">';
