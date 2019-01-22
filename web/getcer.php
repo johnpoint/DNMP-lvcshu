@@ -37,7 +37,7 @@ if ( $vcode == 1) {
         }
     }
     listDir("ssl",$usercookie);
-    echo '</div></div>';
+    echo '</div>';
     echo '</div>
       </div>
     </div>';
