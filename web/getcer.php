@@ -28,8 +28,9 @@ if ( $vcode == 1) {
                             echo '</div>';
                         }
                     }
+                    echo '</div>';
                 }
-                echo '</div></div></div></div>';
+                echo '</div></div></div>';
                 closedir($dh);
             }
         } else {
