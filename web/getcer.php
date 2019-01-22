@@ -29,7 +29,7 @@ if ( $vcode == 1) {
                         }
                     }
                 }
-                echo '</div></div></div>';
+                echo '</div></div>';
                 closedir($dh);
             }
         } else {
@@ -37,7 +37,7 @@ if ( $vcode == 1) {
         }
     }
     listDir("ssl",$usercookie);
-    echo '</div></div></div></div>';
+    echo '</div></div></div>';
     echo '</div>
       </div>
     </div>';
