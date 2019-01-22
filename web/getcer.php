@@ -19,13 +19,13 @@ if ( $vcode == 1) {
                         listDir($dir."/".$file,$cookie);
                     } else {
                         if ($file != "." && $file != ".." && $file != "synccer.sh") {
-                            echo '</div><div class="mdui-panel" mdui-panel>';
+                            echo '<div class="mdui-panel" mdui-panel>';
                             echo '<div class="mdui-panel-item">';
                             echo '<div class="mdui-panel-item-header">'.'<div class="mdui-panel-item-title">'.$file.'</div>'.'<i class="mdui-panel-item-arrow mdui-icon material-icons">keyboard_arrow_down</i>'.'</div>';
                             echo '<div class="mdui-panel-item-body">';
                             echo '<pre> curl https://center.lvcshu.com/getcerfile.php?file='.$dir.'/'.$myfile.$file.' -H \'cookie: user='.$_COOKIE["user"]."'"." > $file".'</pre>';
                             echo "<a href=".'\'https://center.lvcshu.com/getcerfile.php?file='.$dir.'/'.$myfile.$file."'".'class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-theme-accent">View</a>';
-                            echo '</div></div>';
+                            echo '</div></div></div>';
                         }
                     }
                 }
