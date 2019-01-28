@@ -1,6 +1,6 @@
 #!/bin/bash
 
-ver='1.0.2'
+ver='2.0.0'
 Green_font_prefix="\033[32m" && Red_font_prefix="\033[31m" && Green_background_prefix="\033[42;37m" && Red_background_prefix="\033[41;37m" && Font_color_suffix="\033[0m"
 Info="${Green_font_prefix}[信息]${Font_color_suffix}"
 Error="${Red_font_prefix}[错误]${Font_color_suffix}"
@@ -52,12 +52,16 @@ install(){
   systemctl start docker
   curl -L https://github.com/docker/compose/releases/download/1.19.0/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
   chmod +x /usr/local/bin/docker-compose
-  mkdir /web/vhost /web/conf /web/ssl -p
+  mkdir /web/vhost /web/conf /web/ssl/auto -p
   curl  https://get.acme.sh | sh
   wget https://git.lvcshu.com/johnpoint/DNMP-lvcshu/raw/master/docker-compose.yml
   docker-compose up -d
   #curl "https://api.lvcshu.com/?do=add&key=${key}&ip=$(curl ip.sb -4)&hostname=$(hostname)&ipv6=$(curl ip.sb -6)&serverid=$(cat /proc/sys/kernel/random/uuid)&what=servers
   curl https://getcaddy.com | bash -s personal http.filebrowser
+  mv DNMP .DNMP
+  chmod +x .DNMP
+  echo "alias DNMP=~/DNMP" >> ~/.bashrc
+}
 
 add_ssl_cer(){
 	echo "====================="
@@ -116,10 +120,19 @@ add_vhost(){
         echo "2.Let签发"
         read sslyn
         if [[ ${sslyn} == '1' ]]; then
-          read -p "证书路径:(cer)" cerdir
-          read -p "私钥路径:(key)" keydir
-          cp $cerdir /web/ssl/$dom/fullchain.cer
-          cp $keydir /web/ssl/$dom/${dom}.key
+        echo "是否使用证书自动拉取更新?(yn)"
+          read autoupdate
+          if [[ ${autoupdate} == 'y' ]]; then
+            echo ${dom} >> /web/ssl/auto/url.list
+            crontab -e
+            dir='/web/ssl/auto/'+${dom}
+          else
+            read -p "证书路径:(cer)" cerdir
+            read -p "私钥路径:(key)" keydir
+            cp $cerdir /web/ssl/$dom/fullchain.cer
+            cp $keydir /web/ssl/$dom/${dom}.key
+            dir='/web/ssl/'+${dom}
+          fi
         else
           docker restart nginx
           add_ssl
@@ -153,6 +166,7 @@ make_config(){
   echo "server
       {
           listen 80;
+          #ipv6访问
           #listen [::]:80;
           server_name ${dom} ;
           index index.html index.htm index.php default.html default.htm default.php;
@@ -201,20 +215,24 @@ ssl_config(){
   echo "server
       {
           listen 443 ssl http2;
+          #ipv6访问
           #listen [::]:443 ssl http2;
           server_name ${dom} ;
           index index.html index.htm index.php default.html default.htm default.php;
           root  /web/vhost/${dom};
           ssl on;
-          ssl_certificate /web/ssl/${dom}/fullchain.cer;
-          ssl_certificate_key /web/ssl/${dom}/${dom}.key;
+          #ssl_certificate /web/ssl/${dom}/fullchain.cer;
+          ssl_certificate ${dir}/fullchain.cer;
+          #ssl_certificate_key /web/ssl/${dom}/${dom}.key;
+          ssl_certificate_key ${dir}/${dom}.key;
           ssl_session_timeout 5m;
-          ssl_protocols TLSv1.1 TLSv1.2;
+          ssl_protocols TLSv1.2 TLSv1.3;
           ssl_prefer_server_ciphers on;
           ssl_ciphers \"EECDH+CHACHA20:EECDH+CHACHA20-draft:EECDH+AES128:RSA+AES128:EECDH+AES256:RSA+AES256:EECDH+3DES:RSA+3DES:!MD5\";
           ssl_session_cache builtin:1000 shared:SSL:10m;
           # openssl dhparam -out /usr/local/nginx/conf/ssl/dhparam.pem 2048
           # ssl_dhparam /usr/local/nginx/conf/ssl/dhparam.pem;
+          #HSTS
           #add_header Strict-Transport-Security \"max-age=31536000; includeSubDomains\" always;
           #include rewrite/none.conf;
           #error_page   404   /404.html;
