@@ -1,6 +1,7 @@
 <?php
 include_once 'config.php';
 include_once 'verify.php';
+include_once 'func.php';
 if ( $vcode == 1) {
     echo '<div class="mdui-container doc-container doc-no-cover">
     <h1 class="doc-title mdui-text-color-theme">服务器管理面板 - 证书分发</h1>
