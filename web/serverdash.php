@@ -11,7 +11,7 @@ if ( $vcode == 1) {
     $info = serverDbView();
     $deinfo = json_decode($info);
     echo $info;
-    echo '---';
+    echo '<br>';
     echo $deinfo;
     echo '</div>
     </div>

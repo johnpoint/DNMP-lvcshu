@@ -69,11 +69,18 @@ function serverDbView(){
   $query = "SELECT * FROM servers";
   $result = $conn->query($query);
   if ($result->num_rows > 0) {
-    $data = '[';
+    $data = array();
     while($row = $result->fetch_assoc()) {
-      $data = $data . json_encode($row) . ',';
+      $info['id'] = $row['id'];
+      $info['hostname'] = $row['hostname'];
+      $info['ipv4'] = $row['ipv4'];
+      $info['ipv6'] = $row['ipv6'];
+      $info['nginx'] = $row['nginx'];
+      $info['php-fpm'] = $row['php-fpm'];
+      $info['mysql'] = $row['mysql'];
+      $info['proxy'] = $row['proxy'];
+      array_push($data,$info);
     }
-    $data = $data . ']';
     return $data;
   } else {
     return '{"code":"1"}';
