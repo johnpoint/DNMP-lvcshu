@@ -6,11 +6,11 @@ if ( $vcode == 1) {
     <h1 class="doc-title mdui-text-color-theme">服务器管理面板 - 证书分发</h1>
     <div class="doc-chapter">
       <div class="mdui-typo">
-      <div id="serverinfo"></div>'
+      <div id="serverinfo"></div>';
     echo serverDbView();
     echo '</div>
     </div>
-    </div>'
+    </div>';
 } else {
     header("Location: /index.php");
 }
