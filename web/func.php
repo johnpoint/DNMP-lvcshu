@@ -70,6 +70,7 @@ function serverDbView(){
   $result = $conn->query($query);
   if ($result->num_rows > 0) {
     $data = array();
+    $data['info'] = array();
     $num = -1;
     while($row = $result->fetch_assoc()) {
       $num = $num + 1;
