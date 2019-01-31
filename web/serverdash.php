@@ -27,25 +27,25 @@ if ( $vcode == 1) {
         echo '<td id='.$i.$j.'>'.$info['info'][$i]['ipv4'].'</td>';$j++;
         echo '<td id='.$i.$j.'>'.$info['info'][$i]['ipv6'].'</td>';$j++;
         echo '<td id='.$i.$j.'>'.$info['info'][$i]['hostname'].'</td>';$j++;
-        if($info['info'][$i]['nginx'] == '0'){
-            echo '<td id='.$i.$j.'>运行</td>';$j++;
+        if($info['info'][$i]['nginx'] == '1'){
+            echo '<td id='.$i.$j.' bgcolor="green">运行</td>';$j++;
         } else {
-            echo '<td id='.$i.$j.'>关闭</td>';$j++;
+            echo '<td id='.$i.$j.' bgcolor="red">关闭</td>';$j++;
         }
-        if($info['info'][$i]['php-fpm'] == '0'){
-            echo '<td id='.$i.$j.'>运行</td>';$j++;
+        if($info['info'][$i]['php-fpm'] == '1'){
+            echo '<td id='.$i.$j.' bgcolor="green">运行</td>';$j++;
         } else {
-            echo '<td id='.$i.$j.'>关闭</td>';$j++;
+            echo '<td id='.$i.$j.' bgcolor="red">关闭</td>';$j++;
         }
-        if($info['info'][$i]['mysql'] == '0'){
-            echo '<td id='.$i.$j.'>运行</td>';$j++;
+        if($info['info'][$i]['mysql'] == '1'){
+            echo '<td id='.$i.$j.' bgcolor="green">运行</td>';$j++;
         } else {
-            echo '<td id='.$i.$j.'>关闭</td>';$j++;
+            echo '<td id='.$i.$j.' bgcolor="red">关闭</td>';$j++;
         }
-        if($info['info'][$i]['proxy'] == '0'){
-            echo '<td id='.$i.$j.'>运行</td>';$j++;
+        if($info['info'][$i]['proxy'] == '1'){
+            echo '<td id='.$i.$j.' bgcolor="green">运行</td>';$j++;
         } else {
-            echo '<td id='.$i.$j.'>关闭</td>';$j++;
+            echo '<td id='.$i.$j.' bgcolor="red">关闭</td>';$j++;
         }
     }
     echo '</tbody>
