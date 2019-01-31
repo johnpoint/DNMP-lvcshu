@@ -23,13 +23,13 @@ if ( $vcode == 1) {
     </tr></thead><tbody>';
     for($i = 0;$i <= $info['num'];$i = $i +1){
         echo '<tr><td>'.$info['info'][$i]['id'].'</td>';
-        echo '<tr><td>'.$info['info'][$i]['ipv4'].'</td>';
-        echo '<tr><td>'.$info['info'][$i]['ipv6'].'</td>';
-        echo '<tr><td>'.$info['info'][$i]['hostname'].'</td>';
-        echo '<tr><td>'.$info['info'][$i]['nginx'].'</td>';
-        echo '<tr><td>'.$info['info'][$i]['php-fpm'].'</td>';
-        echo '<tr><td>'.$info['info'][$i]['mysql'].'</td>';
-        echo '<tr><td>'.$info['info'][$i]['proxy'].'</td></tr>';
+        echo '<td>'.$info['info'][$i]['ipv4'].'</td>';
+        echo '<td>'.$info['info'][$i]['ipv6'].'</td>';
+        echo '<td>'.$info['info'][$i]['hostname'].'</td>';
+        echo '<td>'.$info['info'][$i]['nginx'].'</td>';
+        echo '<td>'.$info['info'][$i]['php-fpm'].'</td>';
+        echo '<td>'.$info['info'][$i]['mysql'].'</td>';
+        echo '<td>'.$info['info'][$i]['proxy'].'</td></tr>';
     }
     echo '</tbody>
     </table>
