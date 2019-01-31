@@ -54,7 +54,7 @@ if ( $vcode == 1) {
     echo '</div>
     </div>';
     echo "<script type=\"text/javascript\">
-    $('td').click(function () {
+    $('td.service').click(function () {
         this.innerHTML='等待';
         this.bgColor='yellow';
       });
