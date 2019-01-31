@@ -11,7 +11,7 @@ if ($action == 'reg'){
         $ipv4=$_GET['ip'];
         $hostname=$_GET['hostname'];
         $ipv6=$_GET['ipv6'];
-        serverDbEdit($ipv4,$ipv6,$hostname);
+        echo serverDbEdit($ipv4,$ipv6,$hostname);
         echo '{"code":"0"}';
     } else {
         echo '{"code":"1","error_text":"SECRET error"}';

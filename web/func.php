@@ -47,11 +47,11 @@ function settingsDbEdit($mod,$name,$do,$data){
   $conn->close();
 }
 
-function serverDbEdit ($ipv4,$ipv6,$hostname){
+function serverDbEdit($ipv4,$ipv6,$hostname){
   include 'config.php';
   $conn = new mysqli($servername, $dbusername, $dbpassword, $dbname);
   if ($conn->connect_error) {
-    die("连接失败: " . $conn->connect_error);
+    return 'error'. $conn->connect_error;
   }
   $insert = $conn->prepare("INSERT INTO servers (hostname,ipv4,ipv6) VALUES (?,?,?)");
   $insert->bind_param("sss", $ipv4,$ipv6,$hostname);
