@@ -8,8 +8,11 @@ if ( $vcode == 1) {
     <div class="doc-chapter">
       <div class="mdui-typo">
       <div id="serverinfo"></div>';
-    echo serverDbView();
-    echo json_decode(serverDbView());
+    $info = serverDbView();
+    $deinfo = json_decode($info);
+    echo $info;
+    echo '---';
+    echo $deinfo;
     echo '</div>
     </div>
     </div>';
