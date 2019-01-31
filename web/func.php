@@ -54,7 +54,7 @@ function serverDbEdit($ipv4,$ipv6,$hostname){
     return 'error'. $conn->connect_error;
   }
   $insert = $conn->prepare("INSERT INTO servers (hostname,ipv4,ipv6) VALUES (?,?,?)");
-  $insert->bind_param("sss", $ipv4,$ipv6,$hostname);
+  $insert->bind_param("sss", $hostname,$ipv4,$ipv6);
   $returndata=$insert->execute();
   $insert->close();
   return $returndata;
