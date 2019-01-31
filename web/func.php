@@ -1,4 +1,5 @@
 <?php
+include_once 'config.php';
 function settingsDbEdit($mod,$name,$do,$data){
   // 创建连接
   $conn = new mysqli($servername, $dbusername, $dbpassword, $dbname);
