@@ -70,7 +70,9 @@ function serverDbView(){
   $result = $conn->query($query);
   if ($result->num_rows > 0) {
     $data = array();
+    $num = -1;
     while($row = $result->fetch_assoc()) {
+      $num = $num + 1;
       $info['id'] = $row['id'];
       $info['hostname'] = $row['hostname'];
       $info['ipv4'] = $row['ipv4'];
@@ -79,8 +81,9 @@ function serverDbView(){
       $info['php-fpm'] = $row['php-fpm'];
       $info['mysql'] = $row['mysql'];
       $info['proxy'] = $row['proxy'];
-      array_push($data,$info);
+      array_push($data['info'],$info);
     }
+    $data['num'] = $num;
     return $data;
   } else {
     return '{"code":"1"}';
