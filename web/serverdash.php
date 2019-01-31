@@ -9,12 +9,12 @@ if ( $vcode == 1) {
       <div class="mdui-typo">
       <div id="serverinfo"></div>';
     $info = serverDbView();
-    $deinfo = json_encode($info);
-    echo $info;
-    echo '<br>';
-    echo $deinfo;
+    for($i = 0;$info[$i]['id'] >= 0;$i = $i +1)
+        echo $info[$i]['id'];
+        echo $info[$i]['ipv4'];
+        echo $info[$i]['ipv6'];
+        echo $info[$i]['hostname'];
     echo '</div>
-    </div>
     </div>';
 } else {
     header("Location: /index.php");
