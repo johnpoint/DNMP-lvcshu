@@ -27,28 +27,44 @@ if ( $vcode == 1) {
         echo '<td id='.$i.$j.'>'.$info['info'][$i]['ipv4'].'</td>';$j++;
         echo '<td id='.$i.$j.'>'.$info['info'][$i]['ipv6'].'</td>';$j++;
         echo '<td id='.$i.$j.'>'.$info['info'][$i]['hostname'].'</td>';$j++;
-        echo '<td id='.$i.$j.'>'.$info['info'][$i]['nginx'].'</td>';$j++;
-        echo '<td id='.$i.$j.'>'.$info['info'][$i]['php-fpm'].'</td>';$j++;
-        echo '<td id='.$i.$j.'>'.$info['info'][$i]['mysql'].'</td>';$j++;
-        echo '<td id='.$i.$j.'>'.$info['info'][$i]['proxy'].'</td></tr>';
+        if($info['info'][$i]['nginx'] == '0'){
+            echo '<td id='.$i.$j.'>运行</td>';$j++;
+        } else {
+            echo '<td id='.$i.$j.'>关闭</td>';$j++;
+        }
+        if($info['info'][$i]['php-fpm'] == '0'){
+            echo '<td id='.$i.$j.'>运行</td>';$j++;
+        } else {
+            echo '<td id='.$i.$j.'>关闭</td>';$j++;
+        }
+        if($info['info'][$i]['mysql'] == '0'){
+            echo '<td id='.$i.$j.'>运行</td>';$j++;
+        } else {
+            echo '<td id='.$i.$j.'>关闭</td>';$j++;
+        }
+        if($info['info'][$i]['proxy'] == '0'){
+            echo '<td id='.$i.$j.'>运行</td>';$j++;
+        } else {
+            echo '<td id='.$i.$j.'>关闭</td>';$j++;
+        }
     }
     echo '</tbody>
     </table>
   </div>';
     echo '</div>
     </div>';
-    echo "<script type=\"text/javascript\">
+    /*echo "<script type=\"text/javascript\">
         setInterval(function(){
             $.ajax({
                 url : 'db.php',
                 type : 'post',
                 data: {mod:'poll'},
                 success : function(data){
-                    console.log($data);
+                    
                 }
             });
         },2000);
-    </script>";
+    </script>";*/
 } else {
     header("Location: /index.php");
 }
