@@ -71,7 +71,7 @@ function serverDbView(){
   if ($result->num_rows > 0) {
     $data = '[';
     while($row = $result->fetch_assoc()) {
-      $data = ',' . $data . json_encode($row);
+      $data = $data . json_encode($row) . ',';
     }
     $data = $data . ']';
     return $data;
