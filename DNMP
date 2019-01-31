@@ -56,7 +56,7 @@ install(){
   curl  https://get.acme.sh | sh
   wget https://git.lvcshu.com/johnpoint/DNMP-lvcshu/raw/master/docker-compose.yml
   docker-compose up -d
-  #curl "https://api.lvcshu.com/?do=add&key=${key}&ip=$(curl ip.sb -4)&hostname=$(hostname)&ipv6=$(curl ip.sb -6)&serverid=$(cat /proc/sys/kernel/random/uuid)&what=servers
+  #curl "https://api.lvcshu.com/api.php?do=reg&secret=${key}&ip=$(curl ip.sb -4)&hostname=$(hostname)&ipv6=$(curl ip.sb -6)
   curl https://getcaddy.com | bash -s personal http.filebrowser
   mv DNMP .DNMP
   chmod +x .DNMP

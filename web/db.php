@@ -12,7 +12,7 @@ if ( $vcode == 1) {
   } elseif ($_POST['mod'] == 'add') {
     $data=array($_POST['data1'], $_POST['data2']);
   }
-  echo dbquery($_POST['mod'],$_POST['name'],$_POST['do'],$data);
+  echo settingsDbEdit($_POST['mod'],$_POST['name'],$_POST['do'],$data);
 } else {
   header("Location: /index.php");
 }
