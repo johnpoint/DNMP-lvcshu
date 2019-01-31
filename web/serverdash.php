@@ -37,6 +37,18 @@ if ( $vcode == 1) {
   </div>';
     echo '</div>
     </div>';
+    echo "<script type=\"text/javascript\">
+        setInterval(function(){
+            $.ajax({
+                url : 'db.php',
+                type : 'post',
+                data: {mod:'poll'},
+                success : function(data){
+                    console.log($data);
+                }
+            });
+        },2000);
+    </script>";
 } else {
     header("Location: /index.php");
 }

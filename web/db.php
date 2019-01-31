@@ -11,6 +11,9 @@ if ( $vcode == 1) {
     } 
   } elseif ($_POST['mod'] == 'add') {
     $data=array($_POST['data1'], $_POST['data2']);
+  } elseif ($_POST['mod'] == 'poll'){
+    echo serverDbView();
+    return 0;
   }
   echo settingsDbEdit($_POST['mod'],$_POST['name'],$_POST['do'],$data);
 } else {
