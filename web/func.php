@@ -39,7 +39,7 @@ function dbquery($mod,$name,$do,$data){
       return $returndata;
     } elseif ($_POST['mod'] == 'add') {
       $insert->bind_param("sss", $name, $data[0], $data[1]);
-      $returndata $insert->execute();
+      $returndata=$insert->execute();
       $insert->close();
       return $returndata;
     }

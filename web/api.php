@@ -8,12 +8,11 @@ $SQLsecret=dbquery('view','secret',NULL,NULL);
 
 if ($action == 'reg'){
     if ($secret == $SQLsecret){
-        //注册服务器
+        
     } else {
         echo '{"code":"1","error_text":"SECRET error"}';
     }
 } elseif ($action == 'get') {
-    
+    //索引数组转json
 }
-
 ?>
