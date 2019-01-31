@@ -23,14 +23,14 @@ if ( $vcode == 1) {
     </tr></thead><tbody>';
     for($i = 0;$i <= $info['num'];$i++){
         $j = 0;
-        echo '<tr><td id=$i.$j>'.$info['info'][$i]['id'].'</td>';$j++;
-        echo '<td id=$i.$j>'.$info['info'][$i]['ipv4'].'</td>';$j++;
-        echo '<td id=$i.$j>'.$info['info'][$i]['ipv6'].'</td>';$j++;
-        echo '<td id=$i.$j>'.$info['info'][$i]['hostname'].'</td>';$j++;
-        echo '<td id=$i.$j>'.$info['info'][$i]['nginx'].'</td>';$j++;
-        echo '<td id=$i.$j>'.$info['info'][$i]['php-fpm'].'</td>';$j++;
-        echo '<td id=$i.$j>'.$info['info'][$i]['mysql'].'</td>';$j++;
-        echo '<td id=$i.$j>'.$info['info'][$i]['proxy'].'</td></tr>';
+        echo '<tr><td id='.$i.$j.'>'.$info['info'][$i]['id'].'</td>';$j++;
+        echo '<tr><td id='.$i.$j.'>'.$info['info'][$i]['ipv4'].'</td>';$j++;
+        echo '<tr><td id='.$i.$j.'>'.$info['info'][$i]['ipv6'].'</td>';$j++;
+        echo '<tr><td id='.$i.$j.'>'.$info['info'][$i]['hostname'].'</td>';$j++;
+        echo '<tr><td id='.$i.$j.'>'.$info['info'][$i]['nginx'].'</td>';$j++;
+        echo '<tr><td id='.$i.$j.'>'.$info['info'][$i]['php-fpm'].'</td>';$j++;
+        echo '<tr><td id='.$i.$j.'>'.$info['info'][$i]['mysql'].'</td>';$j++;
+        echo '<tr><td id='.$i.$j.'>'.$info['info'][$i]['proxy'].'</td></tr>';
     }
     echo '</tbody>
     </table>
