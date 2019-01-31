@@ -69,9 +69,11 @@ function serverDbView(){
   $query = "SELECT * FROM servers";
   $result = $conn->query($query);
   if ($result->num_rows > 0) {
+    $data = '[';
     while($row = $result->fetch_assoc()) {
-      $data = $data . json_encode($row);
+      $data = ',' . $data . json_encode($row);
     }
+    $data = $data . ']';
     return $data;
   } else {
     return '{"code":"1"}';
