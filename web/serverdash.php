@@ -44,7 +44,7 @@ if ( $vcode == 1) {
                 type : 'post',
                 data: {mod:'poll'},
                 success : function(data){
-                    console.log(jsonencode($data));
+                    console.log($data);
                 }
             });
         },2000);
