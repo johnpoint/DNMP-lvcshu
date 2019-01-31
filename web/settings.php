@@ -57,6 +57,35 @@ if ( $vcode == 1) {
                         </div>
                     </div>
                 </div>
+
+                <div class="mdui-panel" mdui-panel>
+                <div class="mdui-panel-item">
+                    <div class="mdui-panel-item-header">API secret</div>
+                    <div class="mdui-panel-item-body">
+                        <p id=\'secret\'></p>
+                        <div class="mdui-panel-item-actions">
+                            <button class="mdui-btn mdui-color-theme-accent mdui-ripple" id="editsecret">edit</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mdui-dialog" id="editsecretwindow">
+                    <div class="mdui-dialog-title">API secret</div>
+                        <div class="mdui-dialog-content">
+                            <p>更新 API secret</p>
+                            <form>
+                                <div class="mdui-textfield mdui-textfield-floating-label">
+                                    <label class="mdui-textfield-label">SECRET</label>
+                                    <input class="mdui-textfield-input" type="text" id="editsecrettext" />
+                                </div>
+                            </form>
+                            <div class="mdui-dialog-actions">
+                                <button class="mdui-btn mdui-ripple" id="savesecret">save</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="mdui-dialog" id="addonepassw">
                     <div class="mdui-dialog-title">添加授权码</div>
                     <div class="mdui-dialog-content">
@@ -98,18 +127,33 @@ if ( $vcode == 1) {
                             }
                         })
                     };
+                    var c = function () {
+                        $.ajax({
+                            url: "db.php",
+                            method: "POST",
+                            data: { mod: "view", name: "secret" },
+                            success: function (data) {
+                                document.getElementById("secret").innerHTML = data;
+                            }
+                        })
+                    };
                     a();
                     b();
+                    c();
                     function c() {
                         document.getElementById("cookie").innerHTML = \'请重新登陆\';
                     };
                     var edit = new mdui.Dialog(\'#editcookie\');
 var inst = new mdui.Dialog(\'#goodnew\');
 var onpass = new mdui.Dialog(\'#addonepassw\');
+var editsecret = new mdui.Dialog(\'#editsecretwindow\');
 document.getElementById("openedit").onclick = function () {
                             edit.open();
                         }
 document.getElementById("addonepassb").onclick = function () {
+                            onpass.open();
+                        }
+                        document.getElementById("editsecret").onclick = function () {
                             onpass.open();
                         }
 document.getElementById("saveedit").onclick = function () {
@@ -137,6 +181,18 @@ document.getElementById("saveedit").onclick = function () {
                         });
                     };
 
+                    document.getElementById("savesecret").onclick = function () {
+                        $.ajax({
+                            url: "db.php",
+                            method: "POST",
+                            data: { mod: "add", name: "secret", data1: document.getElementById("editsecrettext").value},
+                            success: function () {
+                                onpass.close();
+                                inst.open();
+                                c();
+                            }
+                        });
+                    };
 
 
                 </script>';
