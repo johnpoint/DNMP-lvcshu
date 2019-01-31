@@ -154,7 +154,7 @@ document.getElementById("addonepassb").onclick = function () {
                             onpass.open();
                         }
                         document.getElementById("editsecret").onclick = function () {
-                            onpass.open();
+                            editsecret.open();
                         }
 document.getElementById("saveedit").onclick = function () {
                             $.ajax({
@@ -187,7 +187,7 @@ document.getElementById("saveedit").onclick = function () {
                             method: "POST",
                             data: { mod: "add", name: "secret", data1: document.getElementById("editsecrettext").value},
                             success: function () {
-                                onpass.close();
+                                editsecret.close();
                                 inst.open();
                                 c();
                             }
