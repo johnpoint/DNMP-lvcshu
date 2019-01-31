@@ -53,18 +53,12 @@ if ( $vcode == 1) {
   </div>';
     echo '</div>
     </div>';
-    /*echo "<script type=\"text/javascript\">
-        setInterval(function(){
-            $.ajax({
-                url : 'db.php',
-                type : 'post',
-                data: {mod:'poll'},
-                success : function(data){
-                    
-                }
-            });
-        },2000);
-    </script>";*/
+    echo "<script type=\"text/javascript\">
+    $('td').click(function () {
+        this.innerHTML='等待';
+        this.bgColor='yellow';
+      });
+    </script>";
 } else {
     header("Location: /index.php");
 }
