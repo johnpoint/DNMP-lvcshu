@@ -1,6 +1,6 @@
 <?php
-include_once 'config.php';
 function settingsDbEdit($mod,$name,$do,$data){
+  include_once 'config.php';
   // 创建连接
   $conn = new mysqli($servername, $dbusername, $dbpassword, $dbname);
   
@@ -48,6 +48,7 @@ function settingsDbEdit($mod,$name,$do,$data){
 }
 
 function serverDbEdit ($ipv4,$ipv6,$hostname){
+  include_once 'config.php';
   $conn = new mysqli($servername, $dbusername, $dbpassword, $dbname);
   if ($conn->connect_error) {
     die("连接失败: " . $conn->connect_error);
@@ -59,8 +60,8 @@ function serverDbEdit ($ipv4,$ipv6,$hostname){
   return $returndata;
 }
 
-
 function serverDbView(){
+  include_once 'config.php';
   $conn = new mysqli($servername, $dbusername, $dbpassword, $dbname);
   if ($conn->connect_error) {
     die("连接失败: " . $conn->connect_error);
