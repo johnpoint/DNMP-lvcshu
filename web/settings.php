@@ -185,7 +185,7 @@ document.getElementById("saveedit").onclick = function () {
                         $.ajax({
                             url: "db.php",
                             method: "POST",
-                            data: { mod: "add", name: "secret", data1: document.getElementById("editsecrettext").value},
+                            data: { mod: "update", name: "secret", data1: document.getElementById("editsecrettext").value},
                             success: function () {
                                 editsecret.close();
                                 inst.open();
