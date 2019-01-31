@@ -66,7 +66,7 @@ function serverDbView(){
   if ($conn->connect_error) {
     die("连接失败: " . $conn->connect_error);
   }
-  $query = "SELECT * FROM settings";
+  $query = "SELECT * FROM servers";
   $result = $conn->query($query);
   if ($result->num_rows > 0) {
     while($row = $result->fetch_assoc()) {
