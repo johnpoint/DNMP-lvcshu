@@ -9,12 +9,11 @@ if ( $vcode == 1) {
       <div class="mdui-typo">
       <div id="serverinfo"></div>';
     $info = serverDbView();
-    echo $info['num'];
     for($i = 0;$i <= $info['num'];$i = $i +1){
-        echo $info[$i]['id'];
-        echo $info[$i]['ipv4'];
-        echo $info[$i]['ipv6'];
-        echo $info[$i]['hostname'];
+        echo $info['info'][$i]['id'];
+        echo $info['info'][$i]['ipv4'];
+        echo $info['info'][$i]['ipv6'];
+        echo $info['info'][$i]['hostname'];
     }
     echo '</div>
     </div>';
