@@ -7,7 +7,7 @@ if ( $vcode == 1) {
     if ($_POST['do'] == 'md5'){
       $data=array($_POST['username'],$_POST['userpasswd'],$salt);
     } else {
-      $data=$_POST['value'];
+      $data=$_POST['data'];
     } 
   } elseif ($_POST['mod'] == 'add') {
     $data=array($_POST['data1'], $_POST['data2']);
