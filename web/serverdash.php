@@ -9,6 +9,7 @@ if ( $vcode == 1) {
       <div class="mdui-typo">
       <div id="serverinfo"></div>';
     echo serverDbView();
+    echo json_decode(serverDbView());
     echo '</div>
     </div>
     </div>';
