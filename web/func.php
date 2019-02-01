@@ -69,11 +69,11 @@ function serverDbView($name){
   if ($name == '*'){
     $where = '>=0' ;
   } else {
-    $where = '='.$name;
+    $where = '="'.$name.'"';
   }
   $query = "SELECT * FROM servers WHERE ipv4".$where;
   $result = $conn->query($query);
-  if ($result->num_rows >= 0) {
+  if ($result->num_rows > 0) {
     $data = array();
     $data['info'] = array();
     $num = -1;
