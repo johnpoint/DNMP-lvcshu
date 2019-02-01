@@ -76,7 +76,7 @@ if ( $vcode == 1) {
     $('td.service').click(function () {
         if ( this.bgColor == 'green' ){
             $.ajax({
-                url:'db.php',
+                url:'api.php',
                 method: 'GET',
                 data: {do:'repo',ipv4:this.attributes[4].nodeValue,key:this.attributes['0'].localName,value:'1-0'},
                 success: function () {
@@ -87,7 +87,7 @@ if ( $vcode == 1) {
             });
         } else {
             $.ajax({
-                url:'db.php',
+                url:'api.php',
                 method: 'GET',
                 data: {do:'repo',ipv4:this.attributes[4].nodeValue,key:this.attributes['0'].localName,value:'0-1'},
                 success: function () {
