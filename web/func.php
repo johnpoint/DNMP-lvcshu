@@ -66,7 +66,6 @@ function serverDbEdit($ipv4,$ipv6,$hostname,$mod,$key,$value){
     }
     $update = "UPDATE servers SET ".$key."=".$value." WHERE ipv4=".$ipv4;
     $returndata = $conn->query($update);
-    $update->close();
     return $returndata;
   }
 }
