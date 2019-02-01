@@ -7,7 +7,7 @@ if ( $vcode == 1) {
     <h1 class="doc-title mdui-text-color-theme">服务器管理面板 - 管理</h1>
     <div class="doc-chapter">
       <div class="mdui-typo">
-      <div style="display: none;" id="nonediv"></div>
+      <div style="display: none;" id="nonediv">'.settingsDbEdit('view','secret',NULL,NULL).'</div>
       <div id="serverinfo"></div>';
     $info = serverDbView('*');
     echo '<div class="mdui-table-fluid">
@@ -74,17 +74,6 @@ if ( $vcode == 1) {
     echo '</div>
     </div>';
     echo "<script type=\"text/javascript\">
-    var c = function () {
-        $.ajax({
-            url: 'db.php',
-            method: 'POST',
-            data: { mod: 'view', name: 'secret' },
-            success: function (data) {
-                $('#nonediv').innerHTML=data;
-            }
-        })
-    };
-    c();
     $('td.service').click(function () {
         hitpoint=this;
         if ( this.bgColor == 'green' ){
