@@ -84,6 +84,7 @@ if ( $vcode == 1) {
                 success: function () {
                     hitpoint.bgColor='yellow';
                     hitpoint.innerHTML='关闭中';
+                    location.reload();
                 }
             });
         } else {
@@ -94,6 +95,7 @@ if ( $vcode == 1) {
                 success: function () {
                     hitpoint.bgColor='yellow';
                     hitpoint.innerHTML='开启中';
+                    location.reload();
                 }
             });
         }
