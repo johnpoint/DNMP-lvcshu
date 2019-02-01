@@ -78,20 +78,25 @@ if ( $vcode == 1) {
             $.ajax({
                 url:'db.php',
                 method: 'GET',
-                data: {do:'repo',ipv4:this.ip,key:this.attributes['0'].localName
-                    ,value:'1-0'}
+                data: {do:'repo',ipv4:this.attributes[4].nodeValue,key:this.attributes['0'].localName,value:'1-0'},
+                success: function () {
+                    this.innerHTML='等待';
+                    this.bgColor='yellow';
+                    location.reload();
+                }
             });
         } else {
             $.ajax({
                 url:'db.php',
                 method: 'GET',
-                data: {do:'repo',ipv4:this.ip,key:this.attributes['0'].localName
-                    ,value:'0-1'}
+                data: {do:'repo',ipv4:this.attributes[4].nodeValue,key:this.attributes['0'].localName,value:'0-1'},
+                success: function () {
+                    this.innerHTML='等待';
+                    this.bgColor='yellow';
+                    location.reload();
+                }
             });
         }
-        this.innerHTML='等待';
-        this.bgColor='yellow';
-        location.reload();
       });
     </script>";
 } else {
