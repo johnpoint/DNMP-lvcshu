@@ -80,27 +80,27 @@ else if [[ ${mysqlCENT} == '10' ]]; then
 fi
 
 #proxy
-proxyCENT=`cat data.json |jq -r .info[0].proxy`
-proxy=$(docker ps|grep proxy)
-if [[ ! $proxy ]]; then
-    if [[ ${proxyCENT} == '1' ]]; then
-        curl ${url}'/api.php?do=repo&ipv4='${ipv4}'&secret='${secret}'&key=proxy&value=0'
-    else
-        echo '0error'
-    fi
-else
-    if [[ ${proxyCENT} == '0' ]]; then
-        curl ${url}'/api.php?do=repo&ipv4='${ipv4}'&secret='${secret}'&key=proxy&value=1'
-    else
-        echo '0error'
-    fi
-fi
+#proxyCENT=`cat data.json |jq -r .info[0].proxy`
+#proxy=$(docker ps|grep proxy)
+#if [[ ! $proxy ]]; then
+#    if [[ ${proxyCENT} == '1' ]]; then
+#        curl ${url}'/api.php?do=repo&ipv4='${ipv4}'&secret='${secret}'&key=proxy&value=0'
+#    else
+#        echo '0error'
+#    fi
+#else
+#    if [[ ${proxyCENT} == '0' ]]; then
+#        curl ${url}'/api.php?do=repo&ipv4='${ipv4}'&secret='${secret}'&key=proxy&value=1'
+#    else
+#        echo '0error'
+#    fi
+#fi
 
-if [[ ${proxyCENT} == '11' ]]; then
-    docker start proxy
-    curl ${url}'/api.php?do=repo&ipv4='${ipv4}'&secret='${secret}'&key=proxy&value=1'
-else if [[ ${proxyCENT} == '10' ]]; then
-    docker stop proxy
-    curl ${url}'/api.php?do=repo&ipv4='${ipv4}'&secret='${secret}'&key=proxy&value=0'
-fi
+#if [[ ${proxyCENT} == '11' ]]; then
+#    docker start proxy
+#    curl ${url}'/api.php?do=repo&ipv4='${ipv4}'&secret='${secret}'&key=proxy&value=1'
+#else if [[ ${proxyCENT} == '10' ]]; then
+#    docker stop proxy
+#    curl ${url}'/api.php?do=repo&ipv4='${ipv4}'&secret='${secret}'&key=proxy&value=0'
+#fi
 
