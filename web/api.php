@@ -18,7 +18,7 @@ if ($secret == $SQLsecret){
     } elseif ($action == 'get') {
         echo json_encode(serverDbView($_GET['ipv4']));
     } elseif ($action == 'repo') {
-        $ipv4=$_GET['ip'];
+        $ipv4=$_GET['ipv4'];
         $key=$_GET['key'];
         $value=$_GET['value'];
         serverDbEdit($ipv4,NULL,NULL,'update',$key,$value);
