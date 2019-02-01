@@ -28,43 +28,43 @@ if ( $vcode == 1) {
         echo '<td id='.$i.$j.'>'.$info['info'][$i]['ipv6'].'</td>';$j++;
         echo '<td id='.$i.$j.'>'.$info['info'][$i]['hostname'].'</td>';$j++;
         if($info['info'][$i]['nginx'] == '1'){
-            echo '<td class="service" id='.$i.$j.' bgcolor="green">运行</td>';$j++;
+            echo '<td item="nginx" class="service" id='.$i.$j.' bgcolor="green" ip='.$info['info'][$i]['ipv4'].'>运行</td>';$j++;
         } elseif ($info['info'][$i]['nginx'] == '1-0') {
-            echo '<td class="service" id='.$i.$j.' bgcolor="yellow">关闭中</td>';$j++;
+            echo '<td item="nginx" class="service" id='.$i.$j.' bgcolor="yellow" ip='.$info['info'][$i]['ipv4'].'>关闭中</td>';$j++;
         } elseif ($info['info'][$i]['nginx'] == '0-1') {
-            echo '<td class="service" id='.$i.$j.' bgcolor="yellow">开启中</td>';$j++;
+            echo '<td item="nginx" class="service" id='.$i.$j.' bgcolor="yellow" ip='.$info['info'][$i]['ipv4'].'>开启中</td>';$j++;
         } else {
-            echo '<td class="service" id='.$i.$j.' bgcolor="red">关闭</td>';$j++;
+            echo '<td item="nginx" class="service" id='.$i.$j.' bgcolor="red" ip='.$info['info'][$i]['ipv4'].'>关闭</td>';$j++;
         }
 
         if($info['info'][$i]['php-fpm'] == '1'){
-            echo '<td class="service" id='.$i.$j.' bgcolor="green">运行</td>';$j++;
+            echo '<td item="php-fpm" class="service" id='.$i.$j.' bgcolor="green" ip='.$info['info'][$i]['ipv4'].'>运行</td>';$j++;
         } elseif ($info['info'][$i]['php-fpm'] == '1-0') {
-            echo '<td class="service" id='.$i.$j.' bgcolor="yellow">关闭中</td>';$j++;
+            echo '<td item="php-fpm" class="service" id='.$i.$j.' bgcolor="yellow" ip='.$info['info'][$i]['ipv4'].'>关闭中</td>';$j++;
         } elseif ($info['info'][$i]['php-fpm'] == '0-1') {
-            echo '<td class="service" id='.$i.$j.' bgcolor="yellow">开启中</td>';$j++;
+            echo '<td item="php-fpm" class="service" id='.$i.$j.' bgcolor="yellow" ip='.$info['info'][$i]['ipv4'].'>开启中</td>';$j++;
         } else {
-            echo '<td class="service" id='.$i.$j.' bgcolor="red">关闭</td>';$j++;
+            echo '<td item="php-fpm" class="service" id='.$i.$j.' bgcolor="red" ip='.$info['info'][$i]['ipv4'].'>关闭</td>';$j++;
         }
 
         if($info['info'][$i]['mysql'] == '1'){
-            echo '<td class="service" id='.$i.$j.' bgcolor="green">运行</td>';$j++;
+            echo '<td item="mysql" class="service" id='.$i.$j.' bgcolor="green" ip='.$info['info'][$i]['ipv4'].'>运行</td>';$j++;
         } elseif ($info['info'][$i]['mysql'] == '1-0') {
-            echo '<td class="service" id='.$i.$j.' bgcolor="yellow">关闭中</td>';$j++;
+            echo '<td item="mysql" class="service" id='.$i.$j.' bgcolor="yellow" ip='.$info['info'][$i]['ipv4'].'>关闭中</td>';$j++;
         } elseif ($info['info'][$i]['mysql'] == '0-1') {
-            echo '<td class="service" id='.$i.$j.' bgcolor="yellow">开启中</td>';$j++;
+            echo '<td item="mysql" class="service" id='.$i.$j.' bgcolor="yellow" ip='.$info['info'][$i]['ipv4'].'>开启中</td>';$j++;
         } else {
-            echo '<td class="service" id='.$i.$j.' bgcolor="red">关闭</td>';$j++;
+            echo '<td item="mysql" class="service" id='.$i.$j.' bgcolor="red" ip='.$info['info'][$i]['ipv4'].'>关闭</td>';$j++;
         }
 
         if($info['info'][$i]['proxy'] == '1'){
-            echo '<td class="service" id='.$i.$j.' bgcolor="green">运行</td>';$j++;
+            echo '<td item="proxy" class="service" id='.$i.$j.' bgcolor="green" ip='.$info['info'][$i]['ipv4'].'>运行</td>';$j++;
         } elseif ($info['info'][$i]['proxy'] == '1-0') {
-            echo '<td class="service" id='.$i.$j.' bgcolor="yellow">关闭中</td>';$j++;
+            echo '<td item="proxy" class="service" id='.$i.$j.' bgcolor="yellow" ip='.$info['info'][$i]['ipv4'].'>关闭中</td>';$j++;
         } elseif ($info['info'][$i]['proxy'] == '0-1') {
-            echo '<td class="service" id='.$i.$j.' bgcolor="yellow">开启中</td>';$j++;
+            echo '<td item="proxy" class="service" id='.$i.$j.' bgcolor="yellow" ip='.$info['info'][$i]['ipv4'].'>开启中</td>';$j++;
         } else {
-            echo '<td class="service" id='.$i.$j.' bgcolor="red">关闭</td>';$j++;
+            echo '<td item="proxy" class="service" id='.$i.$j.' bgcolor="red" ip='.$info['info'][$i]['ipv4'].'>关闭</td>';$j++;
         }
     }
     echo '</tbody>
@@ -74,6 +74,19 @@ if ( $vcode == 1) {
     </div>';
     echo "<script type=\"text/javascript\">
     $('td.service').click(function () {
+        if ( this.bgColor == 'green' ){
+            $.ajax({
+                url:'db.php',
+                method: 'GET',
+                data: {do:'repo',ipv4:this.ip,key:this.innerHTML,value:'1-0'}
+            })
+        } else {
+            $.ajax({
+                url:'db.php',
+                method: 'GET',
+                data: {do:'repo',ipv4:this.ip,key:this.innerHTML,value:'0-1'}
+            })
+        }
         this.innerHTML='等待';
         this.bgColor='yellow';
         location.reload();

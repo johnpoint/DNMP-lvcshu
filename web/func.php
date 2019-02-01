@@ -64,6 +64,11 @@ function serverDbEdit($ipv4,$ipv6,$hostname,$mod,$key,$value){
     if ($conn->connect_error) {
       return 'error'. $conn->connect_error;
     }
+    $update = $conn->prepare("UPDATE servers SET ?=? WHERE ipv4=?");
+    $update->bind_param("sss", $key,$value,$ipv4);
+    $returndata = $update->execute();
+    $update->close();
+    return $returndata;
   }
 }
 

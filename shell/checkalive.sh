@@ -7,7 +7,7 @@ if [[ ! $nginx ]]; then
 else
     echo "ON"
 fi
-
+cat json |jq -r .info[0].nginx
 #php-fpm
 phpfpm=$(docker ps|grep php-fpm)
 if [[ ! $phpfpm ]]; then
