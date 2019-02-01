@@ -80,7 +80,8 @@ if ( $vcode == 1) {
                 method: 'GET',
                 data: {do:'repo',ipv4:this.attributes['4'].nodeValue,key:this.attributes['0'].nodeValue,value:'10'},
                 success: function () {
-                    location.reload();
+                    this.bgColor='yellow';
+                    this.innerHTML='关闭中';
                 }
             });
         } else {
@@ -89,7 +90,8 @@ if ( $vcode == 1) {
                 method: 'GET',
                 data: {do:'repo',ipv4:this.attributes['4'].nodeValue,key:this.attributes['0'].nodeValue,value:'11'},
                 success: function () {
-                    location.reload();
+                    this.bgColor='yellow';
+                    this.innerHTML='开启中';
                 }
             });
         }
