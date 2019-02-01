@@ -82,7 +82,6 @@ if ( $vcode == 1) {
                 success: function () {
                     this.innerHTML='等待';
                     this.bgColor='yellow';
-                    location.reload();
                 }
             });
         } else {
@@ -93,7 +92,6 @@ if ( $vcode == 1) {
                 success: function () {
                     this.innerHTML='等待';
                     this.bgColor='yellow';
-                    location.reload();
                 }
             });
         }
