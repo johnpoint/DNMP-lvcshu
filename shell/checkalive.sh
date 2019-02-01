@@ -2,108 +2,110 @@
 url=''
 secret=''
 ipv4=$(curl -q ip.sb -4)
-curl -q ${url}'/api.php?do=get&ipv4='${ipv4}'&secret='${secret} > data.json
-#nginx
-nginxCENT=$(cat data.json |jq -r .info[0].nginx)
-nginx=$(docker ps|grep nginx)
-if [[ ! $nginx ]]; then
-    echo 'nginx off'
-    if [[ ${nginxCENT} == '1' ]]; then
-        curl -q ${url}'/api.php?do=repo&ipv4='${ipv4}'&secret='${secret}'&key=nginx&value=0'
+while((1));do
+    curl -q ${url}'/api.php?do=get&ipv4='${ipv4}'&secret='${secret} > data.json
+    #nginx
+    nginxCENT=$(cat data.json |jq -r .info[0].nginx)
+    nginx=$(docker ps|grep nginx)
+    if [[ ! $nginx ]]; then
+        echo 'nginx off'
+        if [[ ${nginxCENT} == '1' ]]; then
+            curl -q ${url}'/api.php?do=repo&ipv4='${ipv4}'&secret='${secret}'&key=nginx&value=0'
+        else
+            echo '0error'
+        fi
     else
-        echo '0error'
+        echo 'nginx on'
+        if [[ ${nginxCENT} == '0' ]]; then
+            curl -q ${url}'/api.php?do=repo&ipv4='${ipv4}'&secret='${secret}'&key=nginx&value=1'
+        else
+            echo '0error'
+        fi
     fi
-else
-    echo 'nginx on'
-    if [[ ${nginxCENT} == '0' ]]; then
+
+    if [[ ${nginxCENT} == '11' ]]; then
+        echo 'nginx on'
+        docker start nginx
         curl -q ${url}'/api.php?do=repo&ipv4='${ipv4}'&secret='${secret}'&key=nginx&value=1'
-    else
-        echo '0error'
+    elif [[ ${nginxCENT} == '10' ]]; then
+        echo 'nginx off'
+        docker stop nginx
+        curl -q ${url}'/api.php?do=repo&ipv4='${ipv4}'&secret='${secret}'&key=nginx&value=0'
     fi
-fi
 
-if [[ ${nginxCENT} == '11' ]]; then
-    echo 'nginx on'
-    docker start nginx
-    curl -q ${url}'/api.php?do=repo&ipv4='${ipv4}'&secret='${secret}'&key=nginx&value=1'
-elif [[ ${nginxCENT} == '10' ]]; then
-    echo 'nginx off'
-    docker stop nginx
-    curl -q ${url}'/api.php?do=repo&ipv4='${ipv4}'&secret='${secret}'&key=nginx&value=0'
-fi
-
-#phpfpm
-phpfpmCENT=$(cat data.json |jq -r .info[0].phpfpm)
-phpfpm=$(docker ps|grep php-fpm)
-if [[ ! $phpfpm ]]; then
-    if [[ ${phpfpmCENT} == '1' ]]; then
-        curl -q ${url}'/api.php?do=repo&ipv4='${ipv4}'&secret='${secret}'&key=phpfpm&value=0'
+    #phpfpm
+    phpfpmCENT=$(cat data.json |jq -r .info[0].phpfpm)
+    phpfpm=$(docker ps|grep php-fpm)
+    if [[ ! $phpfpm ]]; then
+        if [[ ${phpfpmCENT} == '1' ]]; then
+            curl -q ${url}'/api.php?do=repo&ipv4='${ipv4}'&secret='${secret}'&key=phpfpm&value=0'
+        else
+            echo '0error'
+        fi
     else
-        echo '0error'
+        if [[ ${phpfpmCENT} == '0' ]]; then
+            curl -q ${url}'/api.php?do=repo&ipv4='${ipv4}'&secret='${secret}'&key=phpfpm&value=1'
+        else
+            echo '0error'
+        fi
     fi
-else
-    if [[ ${phpfpmCENT} == '0' ]]; then
+
+    if [[ ${phpfpmCENT} == '11' ]]; then
+        docker start php-fpm
         curl -q ${url}'/api.php?do=repo&ipv4='${ipv4}'&secret='${secret}'&key=phpfpm&value=1'
-    else
-        echo '0error'
+    elif [[ ${phpfpmCENT} == '10' ]]; then
+        docker stop php-fpm
+        curl -q ${url}'/api.php?do=repo&ipv4='${ipv4}'&secret='${secret}'&key=phpfpm&value=0'
     fi
-fi
 
-if [[ ${phpfpmCENT} == '11' ]]; then
-    docker start php-fpm
-    curl -q ${url}'/api.php?do=repo&ipv4='${ipv4}'&secret='${secret}'&key=phpfpm&value=1'
-elif [[ ${phpfpmCENT} == '10' ]]; then
-    docker stop php-fpm
-    curl -q ${url}'/api.php?do=repo&ipv4='${ipv4}'&secret='${secret}'&key=phpfpm&value=0'
-fi
-
-#mysql
-mysqlCENT=$(cat data.json |jq -r .info[0].mysql)
-mysql=$(docker ps|grep mysql)
-if [[ ! $mysql ]]; then
-    if [[ ${mysqlCENT} == '1' ]]; then
-        curl -q ${url}'/api.php?do=repo&ipv4='${ipv4}'&secret='${secret}'&key=mysql&value=0'
+    #mysql
+    mysqlCENT=$(cat data.json |jq -r .info[0].mysql)
+    mysql=$(docker ps|grep mysql)
+    if [[ ! $mysql ]]; then
+        if [[ ${mysqlCENT} == '1' ]]; then
+            curl -q ${url}'/api.php?do=repo&ipv4='${ipv4}'&secret='${secret}'&key=mysql&value=0'
+        else
+            echo '0error'
+        fi
     else
-        echo '0error'
+        if [[ ${mysqlCENT} == '0' ]]; then
+            curl -q ${url}'/api.php?do=repo&ipv4='${ipv4}'&secret='${secret}'&key=mysql&value=1'
+        else
+            echo '0error'
+        fi
     fi
-else
-    if [[ ${mysqlCENT} == '0' ]]; then
+
+    if [[ ${mysqlCENT} == '11' ]]; then
+        docker start mysql
         curl -q ${url}'/api.php?do=repo&ipv4='${ipv4}'&secret='${secret}'&key=mysql&value=1'
-    else
-        echo '0error'
+    elif [[ ${mysqlCENT} == '10' ]]; then
+        docker stop mysql
+        curl -q ${url}'/api.php?do=repo&ipv4='${ipv4}'&secret='${secret}'&key=mysql&value=0'
     fi
-fi
 
-if [[ ${mysqlCENT} == '11' ]]; then
-    docker start mysql
-    curl -q ${url}'/api.php?do=repo&ipv4='${ipv4}'&secret='${secret}'&key=mysql&value=1'
-elif [[ ${mysqlCENT} == '10' ]]; then
-    docker stop mysql
-    curl -q ${url}'/api.php?do=repo&ipv4='${ipv4}'&secret='${secret}'&key=mysql&value=0'
-fi
+    #proxy
+    #proxyCENT=`cat data.json |jq -r .info[0].proxy`
+    #proxy=$(docker ps|grep proxy)
+    #if [[ ! $proxy ]]; then
+    #    if [[ ${proxyCENT} == '1' ]]; then
+    #        curl -q ${url}'/api.php?do=repo&ipv4='${ipv4}'&secret='${secret}'&key=proxy&value=0'
+    #    else
+    #        echo '0error'
+    #    fi
+    #else
+    #    if [[ ${proxyCENT} == '0' ]]; then
+    #        curl -q ${url}'/api.php?do=repo&ipv4='${ipv4}'&secret='${secret}'&key=proxy&value=1'
+    #    else
+    #        echo '0error'
+    #    fi
+    #fi
 
-#proxy
-#proxyCENT=`cat data.json |jq -r .info[0].proxy`
-#proxy=$(docker ps|grep proxy)
-#if [[ ! $proxy ]]; then
-#    if [[ ${proxyCENT} == '1' ]]; then
-#        curl -q ${url}'/api.php?do=repo&ipv4='${ipv4}'&secret='${secret}'&key=proxy&value=0'
-#    else
-#        echo '0error'
-#    fi
-#else
-#    if [[ ${proxyCENT} == '0' ]]; then
-#        curl -q ${url}'/api.php?do=repo&ipv4='${ipv4}'&secret='${secret}'&key=proxy&value=1'
-#    else
-#        echo '0error'
-#    fi
-#fi
-
-#if [[ ${proxyCENT} == '11' ]]; then
-#    docker start proxy
-#    curl -q ${url}'/api.php?do=repo&ipv4='${ipv4}'&secret='${secret}'&key=proxy&value=1'
-#else if [[ ${proxyCENT} == '10' ]]; then
-#    docker stop proxy
-#    curl -q ${url}'/api.php?do=repo&ipv4='${ipv4}'&secret='${secret}'&key=proxy&value=0'
-#fi
-
+    #if [[ ${proxyCENT} == '11' ]]; then
+    #    docker start proxy
+    #    curl -q ${url}'/api.php?do=repo&ipv4='${ipv4}'&secret='${secret}'&key=proxy&value=1'
+    #else if [[ ${proxyCENT} == '10' ]]; then
+    #    docker stop proxy
+    #    curl -q ${url}'/api.php?do=repo&ipv4='${ipv4}'&secret='${secret}'&key=proxy&value=0'
+    #fi
+    sleep 5s
+done
