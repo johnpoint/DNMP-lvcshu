@@ -1,9 +1,13 @@
 <?php
 include_once 'func.php';
+include_once 'verify.php';
 $action=$_GET['do'];
 $secret=$_GET['secret'];
 
 $SQLsecret=settingsDbEdit('view','secret',NULL,NULL);
+if ( $vcode == 1) {
+    $secret = $SQLsecret;
+}
 if ($secret == $SQLsecret){
     if ($action == 'reg'){
         $ipv4=$_GET['ip'];
