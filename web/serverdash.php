@@ -78,13 +78,15 @@ if ( $vcode == 1) {
             $.ajax({
                 url:'db.php',
                 method: 'GET',
-                data: {do:'repo',ipv4:this.ip,key:this.item,value:'1-0'}
+                data: {do:'repo',ipv4:this.ip,key:this.attributes['0'].localName
+                    ,value:'1-0'}
             });
         } else {
             $.ajax({
                 url:'db.php',
                 method: 'GET',
-                data: {do:'repo',ipv4:this.ip,key:this.item,value:'0-1'}
+                data: {do:'repo',ipv4:this.ip,key:this.attributes['0'].localName
+                    ,value:'0-1'}
             });
         }
         this.innerHTML='等待';
