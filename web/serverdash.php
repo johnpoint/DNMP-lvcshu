@@ -78,7 +78,7 @@ if ( $vcode == 1) {
 { 
        window.location.reload(); 
 } 
-setTimeout('myrefresh()',500);
+setTimeout('myrefresh()',5000);
     $('td.service').click(function () {
         hitpoint=this;
         if ( this.bgColor == 'green' ){
