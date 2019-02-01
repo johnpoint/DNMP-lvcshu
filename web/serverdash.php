@@ -80,7 +80,7 @@ if ( $vcode == 1) {
             $.ajax({
                 url:'api.php',
                 method: 'GET',
-                data: {do:'repo',ipv4:this.attributes['4'].nodeValue,key:this.attributes['0'].nodeValue,value:'10',secret:$('#nonediv').innerHTML},
+                data: {do:'repo',ipv4:this.attributes['4'].nodeValue,key:this.attributes['0'].nodeValue,value:'10',secret:document.getElementById('nonediv').innerHTML},
                 success: function () {
                     hitpoint.bgColor='yellow';
                     hitpoint.innerHTML='关闭中';
@@ -90,7 +90,7 @@ if ( $vcode == 1) {
             $.ajax({
                 url:'api.php',
                 method: 'GET',
-                data: {do:'repo',ipv4:this.attributes['4'].nodeValue,key:this.attributes['0'].nodeValue,value:'11',secret:$('#nonediv').innerHTML},
+                data: {do:'repo',ipv4:this.attributes['4'].nodeValue,key:this.attributes['0'].nodeValue,value:'11',secret:document.getElementById('nonediv').innerHTML},
                 success: function () {
                     hitpoint.bgColor='yellow';
                     hitpoint.innerHTML='开启中';
