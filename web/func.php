@@ -60,13 +60,18 @@ function serverDbEdit($ipv4,$ipv6,$hostname){
   return $returndata;
 }
 
-function serverDbView(){
+function serverDbView($name){
   include 'config.php';
   $conn = new mysqli($servername, $dbusername, $dbpassword, $dbname);
   if ($conn->connect_error) {
     die("连接失败: " . $conn->connect_error);
   }
-  $query = "SELECT * FROM servers";
+  if ($name == '*'){
+    $where = '>=0' ;
+  } else {
+    $where = '='.$name;
+  }
+  $query = "SELECT * FROM servers WHERE ipv4".$where;
   $result = $conn->query($query);
   if ($result->num_rows > 0) {
     $data = array();

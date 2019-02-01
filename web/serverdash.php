@@ -8,7 +8,7 @@ if ( $vcode == 1) {
     <div class="doc-chapter">
       <div class="mdui-typo">
       <div id="serverinfo"></div>';
-    $info = serverDbView();
+    $info = serverDbView('*');
     echo '<div class="mdui-table-fluid">
     <table class="mdui-table mdui-table-hoverable">';
     echo '<thead><tr>

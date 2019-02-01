@@ -1,6 +1,5 @@
 <?php
 include_once 'func.php';
-$servername=$_GET['name'];
 $action=$_GET['do'];
 $secret=$_GET['secret'];
 
@@ -17,6 +16,10 @@ if ($action == 'reg'){
         echo '{"code":"1","error_text":"SECRET error"}';
     }
 } elseif ($action == 'get') {
-    //索引数组转json
+    if ($secret == $SQLsecret){
+        echo json_encode(serverDbView($_POST['ipv4']));
+    } else {
+        echo '{"code":"1","error_text":"SECRET error"}';
+    }
 }
 ?>
