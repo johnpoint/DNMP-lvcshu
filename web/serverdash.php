@@ -7,6 +7,7 @@ if ( $vcode == 1) {
     <h1 class="doc-title mdui-text-color-theme">服务器管理面板 - 管理</h1>
     <div class="doc-chapter">
       <div class="mdui-typo">
+      <div style="display: none;" id="nonediv"></div>
       <div id="serverinfo"></div>';
     $info = serverDbView('*');
     echo '<div class="mdui-table-fluid">
@@ -79,7 +80,7 @@ if ( $vcode == 1) {
             method: 'POST',
             data: { mod: 'view', name: 'secret' },
             success: function (data) {
-                var secretda = data;
+                $('#nonediv').innerHTML=data;
             }
         })
     };
