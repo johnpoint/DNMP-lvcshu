@@ -17,7 +17,7 @@ if ($action == 'reg'){
     }
 } elseif ($action == 'get') {
     if ($secret == $SQLsecret){
-        echo json_encode(serverDbView($_POST['ipv4']));
+        echo json_encode(serverDbView($_GET['ipv4']));
     } else {
         echo '{"code":"1","error_text":"SECRET error"}';
     }
