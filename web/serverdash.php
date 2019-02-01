@@ -29,9 +29,9 @@ if ( $vcode == 1) {
         echo '<td id='.$i.$j.'>'.$info['info'][$i]['hostname'].'</td>';$j++;
         if($info['info'][$i]['nginx'] == '1'){
             echo '<td item="nginx" class="service" id='.$i.$j.' bgcolor="green" ip='.$info['info'][$i]['ipv4'].'>运行</td>';$j++;
-        } elseif ($info['info'][$i]['nginx'] == '1-0') {
+        } elseif ($info['info'][$i]['nginx'] == '10') {
             echo '<td item="nginx" class="service" id='.$i.$j.' bgcolor="yellow" ip='.$info['info'][$i]['ipv4'].'>关闭中</td>';$j++;
-        } elseif ($info['info'][$i]['nginx'] == '0-1') {
+        } elseif ($info['info'][$i]['nginx'] == '11') {
             echo '<td item="nginx" class="service" id='.$i.$j.' bgcolor="yellow" ip='.$info['info'][$i]['ipv4'].'>开启中</td>';$j++;
         } else {
             echo '<td item="nginx" class="service" id='.$i.$j.' bgcolor="red" ip='.$info['info'][$i]['ipv4'].'>关闭</td>';$j++;
@@ -39,9 +39,9 @@ if ( $vcode == 1) {
 
         if($info['info'][$i]['php-fpm'] == '1'){
             echo '<td item="php-fpm" class="service" id='.$i.$j.' bgcolor="green" ip='.$info['info'][$i]['ipv4'].'>运行</td>';$j++;
-        } elseif ($info['info'][$i]['php-fpm'] == '1-0') {
+        } elseif ($info['info'][$i]['php-fpm'] == '10') {
             echo '<td item="php-fpm" class="service" id='.$i.$j.' bgcolor="yellow" ip='.$info['info'][$i]['ipv4'].'>关闭中</td>';$j++;
-        } elseif ($info['info'][$i]['php-fpm'] == '0-1') {
+        } elseif ($info['info'][$i]['php-fpm'] == '11') {
             echo '<td item="php-fpm" class="service" id='.$i.$j.' bgcolor="yellow" ip='.$info['info'][$i]['ipv4'].'>开启中</td>';$j++;
         } else {
             echo '<td item="php-fpm" class="service" id='.$i.$j.' bgcolor="red" ip='.$info['info'][$i]['ipv4'].'>关闭</td>';$j++;
@@ -49,9 +49,9 @@ if ( $vcode == 1) {
 
         if($info['info'][$i]['mysql'] == '1'){
             echo '<td item="mysql" class="service" id='.$i.$j.' bgcolor="green" ip='.$info['info'][$i]['ipv4'].'>运行</td>';$j++;
-        } elseif ($info['info'][$i]['mysql'] == '1-0') {
+        } elseif ($info['info'][$i]['mysql'] == '10') {
             echo '<td item="mysql" class="service" id='.$i.$j.' bgcolor="yellow" ip='.$info['info'][$i]['ipv4'].'>关闭中</td>';$j++;
-        } elseif ($info['info'][$i]['mysql'] == '0-1') {
+        } elseif ($info['info'][$i]['mysql'] == '11') {
             echo '<td item="mysql" class="service" id='.$i.$j.' bgcolor="yellow" ip='.$info['info'][$i]['ipv4'].'>开启中</td>';$j++;
         } else {
             echo '<td item="mysql" class="service" id='.$i.$j.' bgcolor="red" ip='.$info['info'][$i]['ipv4'].'>关闭</td>';$j++;
@@ -59,9 +59,9 @@ if ( $vcode == 1) {
 
         if($info['info'][$i]['proxy'] == '1'){
             echo '<td item="proxy" class="service" id='.$i.$j.' bgcolor="green" ip='.$info['info'][$i]['ipv4'].'>运行</td>';$j++;
-        } elseif ($info['info'][$i]['proxy'] == '1-0') {
+        } elseif ($info['info'][$i]['proxy'] == '10') {
             echo '<td item="proxy" class="service" id='.$i.$j.' bgcolor="yellow" ip='.$info['info'][$i]['ipv4'].'>关闭中</td>';$j++;
-        } elseif ($info['info'][$i]['proxy'] == '0-1') {
+        } elseif ($info['info'][$i]['proxy'] == '11') {
             echo '<td item="proxy" class="service" id='.$i.$j.' bgcolor="yellow" ip='.$info['info'][$i]['ipv4'].'>开启中</td>';$j++;
         } else {
             echo '<td item="proxy" class="service" id='.$i.$j.' bgcolor="red" ip='.$info['info'][$i]['ipv4'].'>关闭</td>';$j++;
@@ -78,7 +78,7 @@ if ( $vcode == 1) {
             $.ajax({
                 url:'api.php',
                 method: 'GET',
-                data: {do:'repo',ipv4:this.attributes['4'].nodeValue,key:this.attributes['0'].nodeValue,value:'1-0'},
+                data: {do:'repo',ipv4:this.attributes['4'].nodeValue,key:this.attributes['0'].nodeValue,value:'10'},
                 success: function () {
                     this.innerHTML='等待';
                     this.bgColor='yellow';
@@ -88,7 +88,7 @@ if ( $vcode == 1) {
             $.ajax({
                 url:'api.php',
                 method: 'GET',
-                data: {do:'repo',ipv4:this.attributes['4'].nodeValue,key:this.attributes['0'].nodeValue,value:'0-1'},
+                data: {do:'repo',ipv4:this.attributes['4'].nodeValue,key:this.attributes['0'].nodeValue,value:'11'},
                 success: function () {
                     this.innerHTML='等待';
                     this.bgColor='yellow';
