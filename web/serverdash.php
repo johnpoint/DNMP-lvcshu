@@ -44,7 +44,7 @@ if ( $vcode == 1) {
         } elseif ($info['info'][$i]['php-fpm'] == '11') {
             echo '<td item="phpfpm" class="service" id='.$i.$j.' bgcolor="yellow" ip='.$info['info'][$i]['ipv4'].'>开启中</td>';$j++;
         } else {
-            echo '<td item="php-fpm" class="service" id='.$i.$j.' bgcolor="red" ip='.$info['info'][$i]['ipv4'].'>关闭</td>';$j++;
+            echo '<td item="phpfpm" class="service" id='.$i.$j.' bgcolor="red" ip='.$info['info'][$i]['ipv4'].'>关闭</td>';$j++;
         }
 
         if($info['info'][$i]['mysql'] == '1'){
