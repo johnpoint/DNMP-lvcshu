@@ -107,5 +107,5 @@ while((1));do
     #    docker stop proxy
     #    curl -q ${url}'/api.php?do=repo&ipv4='${ipv4}'&secret='${secret}'&key=proxy&value=0'
     #fi
-    sleep 5s
+    sleep 1s
 done
