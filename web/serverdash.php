@@ -74,6 +74,11 @@ if ( $vcode == 1) {
     echo '</div>
     </div>';
     echo "<script type=\"text/javascript\">
+    function myrefresh() 
+{ 
+       window.location.reload(); 
+} 
+setTimeout('myrefresh()',500);
     $('td.service').click(function () {
         hitpoint=this;
         if ( this.bgColor == 'green' ){
