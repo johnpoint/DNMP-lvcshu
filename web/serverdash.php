@@ -74,14 +74,15 @@ if ( $vcode == 1) {
     </div>';
     echo "<script type=\"text/javascript\">
     $('td.service').click(function () {
+        hitpoint=this;
         if ( this.bgColor == 'green' ){
             $.ajax({
                 url:'api.php',
                 method: 'GET',
                 data: {do:'repo',ipv4:this.attributes['4'].nodeValue,key:this.attributes['0'].nodeValue,value:'10'},
                 success: function () {
-                    this.bgColor='yellow';
-                    this.innerHTML='关闭中';
+                    hitpoint.bgColor='yellow';
+                    hitpoint.innerHTML='关闭中';
                 }
             });
         } else {
@@ -90,8 +91,8 @@ if ( $vcode == 1) {
                 method: 'GET',
                 data: {do:'repo',ipv4:this.attributes['4'].nodeValue,key:this.attributes['0'].nodeValue,value:'11'},
                 success: function () {
-                    this.bgColor='yellow';
-                    this.innerHTML='开启中';
+                    hitpoint.bgColor='yellow';
+                    hitpoint.innerHTML='开启中';
                 }
             });
         }
