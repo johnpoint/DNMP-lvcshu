@@ -1,5 +1,9 @@
 #!/usr/bin/bash
-
+url='https://center.lvcshu.com'
+secret='123456'
+ipv4=$(curl ip.sb)
+curl ${url}'/api.php?do=get&ipv4='${ipv4}'&secret='${secret}
+exit
 #nginx
 nginx=$(docker ps|grep nginx)
 if [[ ! $nginx ]]; then

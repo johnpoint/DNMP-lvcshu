@@ -73,13 +73,24 @@ if ( $vcode == 1) {
     echo '</div>
     </div>';
     echo "<script type=\"text/javascript\">
+    var c = function () {
+        $.ajax({
+            url: 'db.php',
+            method: 'POST',
+            data: { mod: 'view', name: 'secret' },
+            success: function (data) {
+                var secretda = data;
+            }
+        })
+    };
+    c();
     $('td.service').click(function () {
         hitpoint=this;
         if ( this.bgColor == 'green' ){
             $.ajax({
                 url:'api.php',
                 method: 'GET',
-                data: {do:'repo',ipv4:this.attributes['4'].nodeValue,key:this.attributes['0'].nodeValue,value:'10'},
+                data: {do:'repo',ipv4:this.attributes['4'].nodeValue,key:this.attributes['0'].nodeValue,value:'10',secret:secretda},
                 success: function () {
                     hitpoint.bgColor='yellow';
                     hitpoint.innerHTML='关闭中';
@@ -89,7 +100,7 @@ if ( $vcode == 1) {
             $.ajax({
                 url:'api.php',
                 method: 'GET',
-                data: {do:'repo',ipv4:this.attributes['4'].nodeValue,key:this.attributes['0'].nodeValue,value:'11'},
+                data: {do:'repo',ipv4:this.attributes['4'].nodeValue,key:this.attributes['0'].nodeValue,value:'11',secret:secretda},
                 success: function () {
                     hitpoint.bgColor='yellow';
                     hitpoint.innerHTML='开启中';
