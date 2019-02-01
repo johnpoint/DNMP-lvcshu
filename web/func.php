@@ -47,17 +47,24 @@ function settingsDbEdit($mod,$name,$do,$data){
   $conn->close();
 }
 
-function serverDbEdit($ipv4,$ipv6,$hostname){
+function serverDbEdit($ipv4,$ipv6,$hostname,$mod,$key,$value){
   include 'config.php';
-  $conn = new mysqli($servername, $dbusername, $dbpassword, $dbname);
-  if ($conn->connect_error) {
-    return 'error'. $conn->connect_error;
+  if ($mod == 'add') {
+    $conn = new mysqli($servername, $dbusername, $dbpassword, $dbname);
+    if ($conn->connect_error) {
+      return 'error'. $conn->connect_error;
+    }
+    $insert = $conn->prepare("INSERT INTO servers (hostname,ipv4,ipv6) VALUES (?,?,?)");
+    $insert->bind_param("sss", $hostname,$ipv4,$ipv6);
+    $returndata=$insert->execute();
+    $insert->close();
+    return $returndata;
+  } elseif ($mod == 'update') {
+    $conn = new mysqli($servername, $dbusername, $dbpassword, $dbname);
+    if ($conn->connect_error) {
+      return 'error'. $conn->connect_error;
+    }
   }
-  $insert = $conn->prepare("INSERT INTO servers (hostname,ipv4,ipv6) VALUES (?,?,?)");
-  $insert->bind_param("sss", $hostname,$ipv4,$ipv6);
-  $returndata=$insert->execute();
-  $insert->close();
-  return $returndata;
 }
 
 function serverDbView($name){

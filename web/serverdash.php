@@ -29,21 +29,40 @@ if ( $vcode == 1) {
         echo '<td id='.$i.$j.'>'.$info['info'][$i]['hostname'].'</td>';$j++;
         if($info['info'][$i]['nginx'] == '1'){
             echo '<td class="service" id='.$i.$j.' bgcolor="green">运行</td>';$j++;
+        } elseif ($info['info'][$i]['nginx'] == '1-0') {
+            echo '<td class="service" id='.$i.$j.' bgcolor="yellow">关闭中</td>';$j++;
+        } elseif ($info['info'][$i]['nginx'] == '0-1') {
+            echo '<td class="service" id='.$i.$j.' bgcolor="yellow">开启中</td>';$j++;
         } else {
             echo '<td class="service" id='.$i.$j.' bgcolor="red">关闭</td>';$j++;
         }
+
         if($info['info'][$i]['php-fpm'] == '1'){
             echo '<td class="service" id='.$i.$j.' bgcolor="green">运行</td>';$j++;
+        } elseif ($info['info'][$i]['php-fpm'] == '1-0') {
+            echo '<td class="service" id='.$i.$j.' bgcolor="yellow">关闭中</td>';$j++;
+        } elseif ($info['info'][$i]['php-fpm'] == '0-1') {
+            echo '<td class="service" id='.$i.$j.' bgcolor="yellow">开启中</td>';$j++;
         } else {
             echo '<td class="service" id='.$i.$j.' bgcolor="red">关闭</td>';$j++;
         }
+
         if($info['info'][$i]['mysql'] == '1'){
             echo '<td class="service" id='.$i.$j.' bgcolor="green">运行</td>';$j++;
+        } elseif ($info['info'][$i]['mysql'] == '1-0') {
+            echo '<td class="service" id='.$i.$j.' bgcolor="yellow">关闭中</td>';$j++;
+        } elseif ($info['info'][$i]['mysql'] == '0-1') {
+            echo '<td class="service" id='.$i.$j.' bgcolor="yellow">开启中</td>';$j++;
         } else {
             echo '<td class="service" id='.$i.$j.' bgcolor="red">关闭</td>';$j++;
         }
+
         if($info['info'][$i]['proxy'] == '1'){
             echo '<td class="service" id='.$i.$j.' bgcolor="green">运行</td>';$j++;
+        } elseif ($info['info'][$i]['proxy'] == '1-0') {
+            echo '<td class="service" id='.$i.$j.' bgcolor="yellow">关闭中</td>';$j++;
+        } elseif ($info['info'][$i]['proxy'] == '0-1') {
+            echo '<td class="service" id='.$i.$j.' bgcolor="yellow">开启中</td>';$j++;
         } else {
             echo '<td class="service" id='.$i.$j.' bgcolor="red">关闭</td>';$j++;
         }
@@ -57,6 +76,7 @@ if ( $vcode == 1) {
     $('td.service').click(function () {
         this.innerHTML='等待';
         this.bgColor='yellow';
+        location.reload();
       });
     </script>";
 } else {
