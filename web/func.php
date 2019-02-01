@@ -94,7 +94,7 @@ function serverDbView($name){
       $info['ipv4'] = $row['ipv4'];
       $info['ipv6'] = $row['ipv6'];
       $info['nginx'] = $row['nginx'];
-      $info['php-fpm'] = $row['php-fpm'];
+      $info['phpfpm'] = $row['phpfpm'];
       $info['mysql'] = $row['mysql'];
       $info['proxy'] = $row['proxy'];
       array_push($data['info'],$info);

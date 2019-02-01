@@ -37,12 +37,12 @@ if ( $vcode == 1) {
             echo '<td item="nginx" class="service" id='.$i.$j.' bgcolor="red" ip='.$info['info'][$i]['ipv4'].'>关闭</td>';$j++;
         }
 
-        if($info['info'][$i]['php-fpm'] == '1'){
-            echo '<td item="php-fpm" class="service" id='.$i.$j.' bgcolor="green" ip='.$info['info'][$i]['ipv4'].'>运行</td>';$j++;
+        if($info['info'][$i]['phpfpm'] == '1'){
+            echo '<td item="phpfpm" class="service" id='.$i.$j.' bgcolor="green" ip='.$info['info'][$i]['ipv4'].'>运行</td>';$j++;
         } elseif ($info['info'][$i]['php-fpm'] == '10') {
-            echo '<td item="php-fpm" class="service" id='.$i.$j.' bgcolor="yellow" ip='.$info['info'][$i]['ipv4'].'>关闭中</td>';$j++;
+            echo '<td item="phpfpm" class="service" id='.$i.$j.' bgcolor="yellow" ip='.$info['info'][$i]['ipv4'].'>关闭中</td>';$j++;
         } elseif ($info['info'][$i]['php-fpm'] == '11') {
-            echo '<td item="php-fpm" class="service" id='.$i.$j.' bgcolor="yellow" ip='.$info['info'][$i]['ipv4'].'>开启中</td>';$j++;
+            echo '<td item="phpfpm" class="service" id='.$i.$j.' bgcolor="yellow" ip='.$info['info'][$i]['ipv4'].'>开启中</td>';$j++;
         } else {
             echo '<td item="php-fpm" class="service" id='.$i.$j.' bgcolor="red" ip='.$info['info'][$i]['ipv4'].'>关闭</td>';$j++;
         }
@@ -80,8 +80,7 @@ if ( $vcode == 1) {
                 method: 'GET',
                 data: {do:'repo',ipv4:this.attributes['4'].nodeValue,key:this.attributes['0'].nodeValue,value:'10'},
                 success: function () {
-                    this.innerHTML='等待';
-                    this.bgColor='yellow';
+                    location.reload();
                 }
             });
         } else {
@@ -90,8 +89,7 @@ if ( $vcode == 1) {
                 method: 'GET',
                 data: {do:'repo',ipv4:this.attributes['4'].nodeValue,key:this.attributes['0'].nodeValue,value:'11'},
                 success: function () {
-                    this.innerHTML='等待';
-                    this.bgColor='yellow';
+                    location.reload();
                 }
             });
         }
