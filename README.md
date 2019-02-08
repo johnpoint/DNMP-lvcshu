@@ -1,6 +1,9 @@
 # DNMP-lvcshu
 
-执行：
-```
-wget https://git.lvcshu.com/johnpoint/DNMP-lvcshu/raw/master/DNMP && bash DNMP install && soure ~/.bashrc
-```
+# THANKS
+
+- [BotoX/ServerStatus](https://github.com/BotoX/ServerStatus)
+
+# LICENSE
+
+GPL v3.0
