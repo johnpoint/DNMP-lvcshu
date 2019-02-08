@@ -1,6 +1,6 @@
 #!/bin/bash
 
-ver='2.0.1'
+ver='2.0.4'
 Green_font_prefix="\033[32m" && Red_font_prefix="\033[31m" && Green_background_prefix="\033[42;37m" && Red_background_prefix="\033[41;37m" && Font_color_suffix="\033[0m"
 Info="${Green_font_prefix}[信息]${Font_color_suffix}"
 Error="${Red_font_prefix}[错误]${Font_color_suffix}"
@@ -43,7 +43,7 @@ install(){
 
 "
   read -p "输入api key:" key
-  read -p "url:" url
+  read -p "url(不带https://):" url
   $PM update -y
   $PM upgrade
   $PM install curl unzip jq -y
@@ -53,7 +53,7 @@ install(){
   systemctl start docker
   curl -L https://github.com/docker/compose/releases/download/1.19.0/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
   chmod +x /usr/local/bin/docker-compose
-  mkdir /web/vhost /web/conf /web/ssl/auto -p
+  mkdir /web/vhost /web/conf /web/ssl/auto /web/mysql -p
   curl  https://get.acme.sh | sh
   wget https://git.lvcshu.com/johnpoint/DNMP-lvcshu/raw/master/docker-compose.yml
   docker-compose up -d
@@ -61,7 +61,7 @@ install(){
   curl https://getcaddy.com | bash -s personal http.filebrowser
   mv DNMP .DNMP
   chmod +x .DNMP
-  echo "alias DNMP=~/DNMP" >> ~/.bashrc
+  echo "alias DNMP=~/.DNMP" >> ~/.bashrc
 }
 
 add_ssl_cer(){
@@ -72,17 +72,27 @@ add_ssl_cer(){
   read -p "(默认: google.com)" dom
   echo "1.使用已有证书"
   echo "2.Let签发"
-  read -p ssl12
-  if [[ ${ssl12} == '1' ]]; then
-    read -p "证书路径:(cer)" cerdir
-    read -p "私钥路径:(key)" keydir
-    cp $cerdir /web/ssl/$dom/fullchain.cer
-    cp $keydir /web/ssl/$dom/${dom}.key
+  read sslyn
+  if [[ ${sslyn} == '1' ]]; then
+    echo "是否使用证书自动拉取更新?(yn)"
+    read autoupdate
+    if [[ ${autoupdate} == 'y' ]]; then
+      echo ${dom} >> /web/ssl/auto/url.list
+      crontab -e
+      dir='/web/ssl/auto/'+${dom}
+    else
+      read -p "证书路径:(cer)" cerdir
+      read -p "私钥路径:(key)" keydir
+      cp $cerdir /web/ssl/$dom/fullchain.cer
+      cp $keydir /web/ssl/$dom/${dom}.key
+      dir='/web/ssl/'+${dom}
+    fi
   else
-  	add_ssl
+    docker restart nginx
+    add_ssl
+  fi
   ssl_config
   docker restart nginx
-  fi
 }
 
 install_phpmyadmin(){

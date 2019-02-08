@@ -1,6 +1,6 @@
 #!/usr/bin/bash
-url=''
-secret=''
+url='https://center.lvcshu.com'
+secret='1234567'
 ipv4=$(curl -q ip.sb -4)
 while((1));do
     curl -q ${url}'/api.php?do=get&ipv4='${ipv4}'&secret='${secret} > data.json
@@ -84,28 +84,30 @@ while((1));do
     fi
 
     #proxy
-    #proxyCENT=`cat data.json |jq -r .info[0].proxy`
-    #proxy=$(docker ps|grep proxy)
-    #if [[ ! $proxy ]]; then
-    #    if [[ ${proxyCENT} == '1' ]]; then
-    #        curl -q ${url}'/api.php?do=repo&ipv4='${ipv4}'&secret='${secret}'&key=proxy&value=0'
-    #    else
-    #        echo '0error'
-    #    fi
-    #else
-    #    if [[ ${proxyCENT} == '0' ]]; then
-    #        curl -q ${url}'/api.php?do=repo&ipv4='${ipv4}'&secret='${secret}'&key=proxy&value=1'
-    #    else
-    #        echo '0error'
-    #    fi
-    #fi
+    proxyCENT=`cat data.json |jq -r .info[0].proxy`
+    proxy=$(docker ps|grep proxy)
+    if [[ ! $proxy ]]; then
+        if [[ ${proxyCENT} == '1' ]]; then
+            curl -q ${url}'/api.php?do=repo&ipv4='${ipv4}'&secret='${secret}'&key=proxy&value=0'
+        else
+            echo '0error'
+        fi
+    else
+        if [[ ${proxyCENT} == '0' ]]; then
+            curl -q ${url}'/api.php?do=repo&ipv4='${ipv4}'&secret='${secret}'&key=proxy&value=1'
+        else
+            echo '0error'
+        fi
+    fi
 
-    #if [[ ${proxyCENT} == '11' ]]; then
-    #    docker start proxy
-    #    curl -q ${url}'/api.php?do=repo&ipv4='${ipv4}'&secret='${secret}'&key=proxy&value=1'
-    #else if [[ ${proxyCENT} == '10' ]]; then
-    #    docker stop proxy
-    #    curl -q ${url}'/api.php?do=repo&ipv4='${ipv4}'&secret='${secret}'&key=proxy&value=0'
-    #fi
+    if [[ ${proxyCENT} == '11' ]]; then
+        docker start proxy
+        curl -q ${url}'/api.php?do=repo&ipv4='${ipv4}'&secret='${secret}'&key=proxy&value=1'
+    elif [[ ${proxyCENT} == '10' ]]; then
+        docker stop proxy
+        curl -q ${url}'/api.php?do=repo&ipv4='${ipv4}'&secret='${secret}'&key=proxy&value=0'
+    fi
+
     sleep 1s
+
 done
