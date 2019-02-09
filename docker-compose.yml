@@ -29,7 +29,7 @@ services:
     networks:
       - site-lvcshu
     volumes:
-      - /data/mysql/data:/var/lib/mysql
+      - /web/mysql/data:/var/lib/mysql
     environment:
       MYSQL_ROOT_PASSWORD: DNMP-lvcshu
 
