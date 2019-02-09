@@ -36,7 +36,6 @@ do
   datee=$(($datee*100))
   hundred=100
   persent=$(($datee/$long))
-  #persent=`expr $persent\*$hundred`
 
   echo "<div class=\"mdui-progress\"><div class=\"mdui-progress-determinate\" style=\"width: ${persent}%;\"></div></div>" >> "data/$line"
 
