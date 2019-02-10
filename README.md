@@ -16,6 +16,14 @@ wget https://raw.githubusercontent.com/johnpoint/DNMP-lvcshu/master/DNMP && bash
 - docker [php-lvcshu](https://cloud.docker.com/u/johnpoint/repository/docker/johnpoint/php-lvcshu) | php 7.2
 - docker [mysql:5.7.23](https://hub.docker.com/_/mysql/scans/library/mysql/5.7.23)
 
+## 脚本 nginx 配置文件
+
+- http访问
+- https访问
+- http 301 重定向 https
+- ipv6 访问
+- HSTS(**H**TTP **S**trict **T**ransport **S**ecurity) header 设置
+
 # THANKS
 
 - [BotoX/ServerStatus](https://github.com/BotoX/ServerStatus)

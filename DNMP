@@ -65,10 +65,10 @@ install(){
 }
 
 add_ssl_cer(){
-	echo "====================="
-	ls /web/vhost
-	echo "====================="
-	echo -e "输入域名:"
+  echo "====================="
+  ls /web/vhost
+  echo "====================="
+  echo -e "输入域名:"
   read -p "(默认: google.com)" dom
   echo "1.使用已有证书"
   echo "2.Let签发"
@@ -96,9 +96,9 @@ add_ssl_cer(){
 }
 
 install_phpmyadmin(){
-	echo "====================="
-	ls /web/vhost
-	echo "====================="
+  echo "====================="
+  ls /web/vhost
+  echo "====================="
   echo -e "输入域名:"
   read -p "(默认: google.com)" dom
   if [[ ! -z ${dom} ]];then
@@ -118,46 +118,56 @@ install_phpmyadmin(){
 }
 
 add_vhost(){
-  echo -e "输入域名:"
-  read -p "(默认: google.com)" dom
-  echo -e "使用SSL？(yn):"
-  read -p "(默认:n)" sslyn
-  if [[ ! -z ${dom} ]];then
-    make_dir
-    make_config
-    add_index
-    if [[ ${sslyn} == "y"  ]]; then
-        echo "1.使用已有证书"
-        echo "2.Let签发"
-        read sslyn
-        if [[ ${sslyn} == '1' ]]; then
-        echo "是否使用证书自动拉取更新?(yn)"
-          read autoupdate
-          if [[ ${autoupdate} == 'y' ]]; then
-            echo ${dom} >> /web/ssl/auto/url.list
-            crontab -e
-            dir='/web/ssl/auto/'+${dom}
-          else
-            read -p "证书路径:(cer)" cerdir
-            read -p "私钥路径:(key)" keydir
-            cp $cerdir /web/ssl/$dom/fullchain.cer
-            cp $keydir /web/ssl/$dom/${dom}.key
-            dir='/web/ssl/'+${dom}
-          fi
+echo -e "输入域名:"
+read -p "(默认: google.com)" dom
+echo -e "使用SSL？(yn):"
+read -p "(默认:n)" sslyn
+if test[ ! -z $dom ];then
+  make_dir
+  make_config
+  add_index
+  if [[ $sslyn == "y"  ]]; then
+    echo "1.使用已有证书"
+    echo "2.Let签发"
+    read sslyn
+    if [[ $sslyn == '1' ]]; then
+      echo "是否使用证书自动拉取更新?(yn)"
+      read autoupdate
+      if [[ $autoupdate == 'y' ]]; then
+        echo "是否自定义域名证书名称(通配符证书一般需要)(y/n)"
+        read editdom
+        if [[ $yneditdom == 'y' ]]; then
+          echo "输入域名"
+          read dom
         else
-          docker restart nginx
-          add_ssl
+          echo -e "${Info}不自定义域名"
         fi
-        ssl_config
-        docker restart nginx
+        dir='/web/ssl/auto/'$dom
       else
-        docker restart nginx
+        dir='/web/ssl/auto/'$dom
       fi
     else
-      echo -e "${Error}无输入，退出"
-      exit
+      read -p "证书路径:(cer)" cerdir
+      read -p "私钥路径:(key)" keydir
+      cp $cerdir /web/ssl/$dom/fullchain.cer
+      cp $keydir /web/ssl/$dom/$dom.key
+      dir='/web/ssl/'$dom
+    fi
+  else
+    docker restart nginx
+    add_ssl
   fi
-  exit
+  ssl_config
+  docker restart nginx
+else
+  docker restart nginx
+fi
+else
+echo -e "$Error无输入，退出"
+exit
+fi
+exi
+
 }
 
 add_ssl(){
@@ -226,15 +236,13 @@ ssl_config(){
   echo "server
       {
           listen 443 ssl http2;
-          #ipv6访问
+          #ipv6
           #listen [::]:443 ssl http2;
           server_name ${dom} ;
           index index.html index.htm index.php default.html default.htm default.php;
           root  /web/vhost/${dom};
           ssl on;
-          #ssl_certificate /web/ssl/${dom}/fullchain.cer;
           ssl_certificate ${dir}/fullchain.cer;
-          #ssl_certificate_key /web/ssl/${dom}/${dom}.key;
           ssl_certificate_key ${dir}/${dom}.key;
           ssl_session_timeout 5m;
           ssl_protocols TLSv1.2 TLSv1.3;
@@ -352,7 +360,7 @@ if [[ ! -z $1  ]]; then
   elif [[ $1 = 'install' ]]; then
     install
   elif [[ $1 = 'v' ]]; then
-  	echo -e "${Info}版本：${ver}"
+    echo -e "${Info}版本：${ver}"
   elif [[ $1 = 'admin' ]]; then
     install_phpmyadmin
   elif [[ $1 = 'start' ]]; then
@@ -361,12 +369,12 @@ if [[ ! -z $1  ]]; then
     docker stop nginx php-fpm mysql
   elif [[ $1 = 'restart' ]]; then
     docker restart nginx php-fpm mysql
-	elif [[ $1 = 'ssl' ]]; then
-		if [[ $2 = 'add' ]]; then
-			add_ssl_cer
-		else
-			echo -e "${Error}无法识别的参数"
-		fi
+  elif [[ $1 = 'ssl' ]]; then
+    if [[ $2 = 'add' ]]; then
+      add_ssl_cer
+    else
+      echo -e "${Error}无法识别的参数"
+    fi
   else
     echo -e "${Error}无法识别的参数(install?)"
     exit
