@@ -53,7 +53,7 @@ install(){
   systemctl start docker
   curl -L https://github.com/docker/compose/releases/download/1.19.0/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
   chmod +x /usr/local/bin/docker-compose
-  mkdir /web/vhost /web/conf /web/ssl/auto /web/mysql -p
+  mkdir /web/vhost /web/conf /web/ssl/auto /web/mysql/data -p
   curl  https://get.acme.sh | sh
   wget https://git.lvcshu.com/johnpoint/DNMP-lvcshu/raw/master/docker-compose.yml
   docker-compose up -d
