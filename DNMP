@@ -1,6 +1,6 @@
 #!/bin/bash
 
-ver='2.0.4'
+ver='2.1.0'
 Green_font_prefix="\033[32m" && Red_font_prefix="\033[31m" && Green_background_prefix="\033[42;37m" && Red_background_prefix="\033[41;37m" && Font_color_suffix="\033[0m"
 Info="${Green_font_prefix}[信息]${Font_color_suffix}"
 Error="${Red_font_prefix}[错误]${Font_color_suffix}"
@@ -322,6 +322,21 @@ del_dom(){
   docker restart nginx
 }
 
+backup_zip(){
+  echo -e "${Info} 打包中..."
+  mkdir /web/backup
+  cd /
+  zip backup.zip web/ -r
+  rm /web/backup/backup.zip
+  mv backup.zip /web/backup/
+}
+
+start_web(){
+  cd /web/backup
+  wget https://git.lvcshu.com/johnpoint/pyHCU/raw/master/http.py
+  python http.py
+}
+
 if [[ ! -z $1  ]]; then
   if [[ $1 = 'nginx'  ]]; then
     if [[ ! -z $2  ]]; then
@@ -374,6 +389,13 @@ if [[ ! -z $1  ]]; then
       add_ssl_cer
     else
       echo -e "${Error}无法识别的参数"
+    fi
+  elif [[ $1 = 'backup' ]]; then
+    if [[ $2 = 'web' ]]; then
+      backup_zip
+      start_web
+    else
+      backup_zip
     fi
   else
     echo -e "${Error}无法识别的参数(install?)"

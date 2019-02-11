@@ -30,10 +30,13 @@ wget https://raw.githubusercontent.com/johnpoint/DNMP-lvcshu/master/DNMP && bash
 
 所有文件均在 `/web` 文件夹下
 
-- `/web/vhost` 虚拟主机网站文件夹，按域名命名
-- `/web/ssl` 域名 TLS 证书
-- `/web/conf` 域名 nginx 配置文件
-- `/web/mysql` mysql数据
+| 路径 | 内容 |
+|---|---|
+|/web/vhost|虚拟主机网站文件夹，按域名命名|
+|/web/ssl|域名 TLS 证书|
+|/web/conf|域名 nginx 配置文件|
+|/web/mysql|mysql数据|
+|/web/backup|备份文件|
 
 # THANKS
 
