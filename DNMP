@@ -136,7 +136,7 @@ if [[ ! -z ${dom} ]];then
     if [[ $sslyn == '1' ]]; then
       read -p "对接面板？" yn
       if [[ $yn == 'y' ]]; then
-        read -p "输入证书域名:"dom
+        read -p "输入证书域名:" dom
         dir='/web/ssl/auto/'${dom}
       else
         read -p "证书路径:(cer)" cerdir
