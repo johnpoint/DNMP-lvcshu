@@ -1,6 +1,6 @@
 #!/bin/bash
 
-ver='2.1.7'
+ver='2.1.9'
 Green_font_prefix="\033[32m" && Red_font_prefix="\033[31m" && Green_background_prefix="\033[42;37m" && Red_background_prefix="\033[41;37m" && Font_color_suffix="\033[0m"
 Info="${Green_font_prefix}[信息]${Font_color_suffix}"
 Error="${Red_font_prefix}[错误]${Font_color_suffix}"
@@ -42,8 +42,10 @@ install(){
 |____/|_| \_|_|  |_|_|        |_| \_/ \___|___/_| |_|\__,_|
 
 "
-  read -p "输入api key:" key
-  read -p "url(不带https://):" url
+  echo "输入api key:"
+  read -p ">>" key
+  echo "url(不带https://):"
+  read -p ">>" url
   $PM update -y
   $PM upgrade
   $PM install curl unzip jq -y
@@ -72,7 +74,7 @@ install_phpmyadmin(){
   ls /web/vhost
   echo "====================="
   echo -e "输入域名:"
-  read -p "(默认: google.com)" dom
+  read -p ">>" dom
   if [[ ! -z ${dom} ]];then
     cd /web/vhost/${dom}
     wget https://files.phpmyadmin.net/phpMyAdmin/4.8.4/phpMyAdmin-4.8.4-all-languages.zip
@@ -91,9 +93,9 @@ install_phpmyadmin(){
 
 add_vhost(){
 echo -e "输入域名:"
-read -p "(默认: google.com)" dom
+read -p ">>" dom
 echo -e "使用SSL？(yn):"
-read -p "(默认:n)" sslyn
+read -p ">>" sslyn
 if [[ ! -z ${dom} ]];then
   make_dir
   make_config
@@ -103,7 +105,7 @@ if [[ ! -z ${dom} ]];then
     echo "2.Let签发"
     read -p ">>" sslyn
     if [[ $sslyn == '1' ]]; then
-      echo "对接面板?"
+      echo "对接面板?(y/n)"
       read -p ">>" yn
       if [[ $yn == 'y' ]]; then
         echo "输入证书域名"
@@ -130,7 +132,7 @@ if [[ ! -z ${dom} ]];then
     docker restart nginx
   fi
 else
-  echo -e "${Error}无输入，退出"
+  echo -e "${Error} 无输入，退出"
   exit
 fi
 }
@@ -259,11 +261,7 @@ add_index(){
   touch index.html
   echo " <html>
   <body>
- ____  _   _ __  __ ____       _               _<br>
-|  _ \| \ | |  \/  |  _ \     | |_   _____ ___| |__  _   _<br>
-| | | |  \| | |\/| | |_) |____| \ \ / / __/ __| '_ \| | | |<br>
-| |_| | |\  | |  | |  __/_____| |\ V / (__\__ \ | | | |_| |<br>
-|____/|_| \_|_|  |_|_|        |_| \_/ \___|___/_| |_|\__,_|<br>
+<h1>大功告成!</h1>
 </body>
 </html>
 " > index.html
