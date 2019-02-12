@@ -60,7 +60,7 @@ install(){
   curl "https://${url}/api.php?do=reg&secret=${key}&ip=$(curl ip.sb -4)&hostname=$(hostname)&ipv6=$(curl ip.sb -6)"
   curl https://getcaddy.com | bash -s personal http.filebrowser
   mv DNMP .DNMP
-  chmod +x .DNMP
+  chmod +x .DNMP 
   cd DNMP/shell 
   wget https://raw.githubusercontent.com/johnpoint/DNMP-lvcshu/master/shell/checkalive.sh
   wget https://raw.githubusercontent.com/johnpoint/DNMP-lvcshu/master/shell/update-cer.sh
