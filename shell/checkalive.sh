@@ -1,6 +1,6 @@
 #!/usr/bin/bash
-url='https://center.lvcshu.com'
-secret='1234567'
+url=''
+secret=''
 ipv4=$(curl -q ip.sb -4)
 while((1));do
     curl -q ${url}'/api.php?do=get&ipv4='${ipv4}'&secret='${secret} > data.json
