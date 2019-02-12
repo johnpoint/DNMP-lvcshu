@@ -1,6 +1,6 @@
 #!/bin/bash
 
-ver='2.1.5'
+ver='2.1.6'
 Green_font_prefix="\033[32m" && Red_font_prefix="\033[31m" && Green_background_prefix="\033[42;37m" && Red_background_prefix="\033[41;37m" && Font_color_suffix="\033[0m"
 Info="${Green_font_prefix}[信息]${Font_color_suffix}"
 Error="${Red_font_prefix}[错误]${Font_color_suffix}"
@@ -67,37 +67,6 @@ install(){
   echo "alias DNMP=~/.DNMP" >> ~/.bashrc
 }
 
-add_ssl_cer(){
-  echo "====================="
-  ls /web/vhost
-  echo "====================="
-  echo -e "输入域名:"
-  read -p "(默认: google.com)" dom
-  echo "1.使用已有证书"
-  echo "2.Let签发"
-  read sslyn
-  if [[ ${sslyn} == '1' ]]; then
-    echo "是否使用证书自动拉取更新?(yn)"
-    read autoupdate
-    if [[ ${autoupdate} == 'y' ]]; then
-      echo ${dom} >> /web/ssl/auto/url.list
-      crontab -e
-      dir='/web/ssl/auto/'+${dom}
-    else
-      read -p "证书路径:(cer)" cerdir
-      read -p "私钥路径:(key)" keydir
-      cp $cerdir /web/ssl/${dom}/fullchain.cer
-      cp $keydir /web/ssl/${dom}/${dom}.key
-      dir='/web/ssl/'+${dom}
-    fi
-  else
-    docker restart nginx
-    add_ssl
-  fi
-  ssl_config
-  docker restart nginx
-}
-
 install_phpmyadmin(){
   echo "====================="
   ls /web/vhost
@@ -132,19 +101,26 @@ if [[ ! -z ${dom} ]];then
   if [[ $sslyn == "y"  ]]; then
     echo "1.使用已有证书"
     echo "2.Let签发"
-    read sslyn
+    read -p ">>" sslyn
     if [[ $sslyn == '1' ]]; then
-      read -p "对接面板？" yn
+      echo "对接面板?"
+      read -p ">>" yn
       if [[ $yn == 'y' ]]; then
-        read -p "输入证书域名:" dom
-        dir='/web/ssl/auto/'${dom}
+        echo "输入证书域名"
+        read -p ">>" ddom
+        dir='/web/ssl/auto/'${ddom}
       else
-        read -p "证书路径:(cer)" cerdir
-        read -p "私钥路径:(key)" keydir
+        echo "证书路径:(cer)"
+        read -p ">>" cerdir
+        echo "私钥路径:(key)"
+        read -p ">>" keydir
         cp $cerdir /web/ssl/${dom}/fullchain.cer
         cp $keydir /web/ssl/${dom}/${dom}.key
         dir='/web/ssl/'${dom}
+        $ddom=$dom
       fi
+      ssl_config
+      docker restart nginx
     else
       echo -e "${Info} 使用 acme.sh 申请证书..."
       add_ssl
@@ -154,7 +130,8 @@ if [[ ! -z ${dom} ]];then
     docker restart nginx
   fi
 else
-  docker restart nginx
+  echo -e "${Error}无输入，退出"
+  exit
 fi
 }
 
@@ -226,12 +203,12 @@ ssl_config(){
           listen 443 ssl http2;
           #ipv6
           #listen [::]:443 ssl http2;
-          server_name ${dom} ;
+          server_name ${ddom} ;
           index index.html index.htm index.php default.html default.htm default.php;
-          root  /web/vhost/${dom};
+          root  /web/vhost/${ddom};
           ssl on;
           ssl_certificate ${dir}/fullchain.cer;
-          ssl_certificate_key ${dir}/${dom}.key;
+          ssl_certificate_key ${dir}/${ddom}.key;
           ssl_session_timeout 5m;
           ssl_protocols TLSv1.2 TLSv1.3;
           ssl_prefer_server_ciphers on;
@@ -250,7 +227,7 @@ ssl_config(){
           location ~ \.php$ {
               fastcgi_pass   php-fpm:9000;
               fastcgi_index  index.php;
-              fastcgi_param  SCRIPT_FILENAME  /web/vhost/${dom}\$fastcgi_script_name;
+              fastcgi_param  SCRIPT_FILENAME  /web/vhost/${ddom}\$fastcgi_script_name;
               include        fastcgi_params;
           }
 
