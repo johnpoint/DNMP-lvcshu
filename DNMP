@@ -1,6 +1,6 @@
 #!/bin/bash
 
-ver='2.1.6'
+ver='2.1.7'
 Green_font_prefix="\033[32m" && Red_font_prefix="\033[31m" && Green_background_prefix="\033[42;37m" && Red_background_prefix="\033[41;37m" && Font_color_suffix="\033[0m"
 Info="${Green_font_prefix}[信息]${Font_color_suffix}"
 Error="${Red_font_prefix}[错误]${Font_color_suffix}"
@@ -203,9 +203,9 @@ ssl_config(){
           listen 443 ssl http2;
           #ipv6
           #listen [::]:443 ssl http2;
-          server_name ${ddom} ;
+          server_name ${dom} ;
           index index.html index.htm index.php default.html default.htm default.php;
-          root  /web/vhost/${ddom};
+          root  /web/vhost/${dom};
           ssl on;
           ssl_certificate ${dir}/fullchain.cer;
           ssl_certificate_key ${dir}/${ddom}.key;
@@ -227,7 +227,7 @@ ssl_config(){
           location ~ \.php$ {
               fastcgi_pass   php-fpm:9000;
               fastcgi_index  index.php;
-              fastcgi_param  SCRIPT_FILENAME  /web/vhost/${ddom}\$fastcgi_script_name;
+              fastcgi_param  SCRIPT_FILENAME  /web/vhost/${dom}\$fastcgi_script_name;
               include        fastcgi_params;
           }
 
