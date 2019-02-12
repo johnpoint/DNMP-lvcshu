@@ -1,6 +1,6 @@
 #!/bin/bash
 
-ver='2.1.2'
+ver='2.1.3'
 Green_font_prefix="\033[32m" && Red_font_prefix="\033[31m" && Green_background_prefix="\033[42;37m" && Red_background_prefix="\033[41;37m" && Font_color_suffix="\033[0m"
 Info="${Green_font_prefix}[信息]${Font_color_suffix}"
 Error="${Red_font_prefix}[错误]${Font_color_suffix}"
@@ -86,8 +86,8 @@ add_ssl_cer(){
     else
       read -p "证书路径:(cer)" cerdir
       read -p "私钥路径:(key)" keydir
-      cp $cerdir /web/ssl/$dom/fullchain.cer
-      cp $keydir /web/ssl/$dom/${dom}.key
+      cp $cerdir /web/ssl/${dom}/fullchain.cer
+      cp $keydir /web/ssl/${dom}/${dom}.key
       dir='/web/ssl/'+${dom}
     fi
   else
@@ -125,7 +125,7 @@ echo -e "输入域名:"
 read -p "(默认: google.com)" dom
 echo -e "使用SSL？(yn):"
 read -p "(默认:n)" sslyn
-if test[ ! -z $dom ];then
+if [[ ! -z ${dom} ]];then
   make_dir
   make_config
   add_index
@@ -134,53 +134,44 @@ if test[ ! -z $dom ];then
     echo "2.Let签发"
     read sslyn
     if [[ $sslyn == '1' ]]; then
-      echo "是否使用证书自动拉取更新?(yn)"
-      read autoupdate
-      if [[ $autoupdate == 'y' ]]; then
-        echo "是否自定义域名证书名称(通配符证书一般需要)(y/n)"
-        read editdom
-        if [[ $yneditdom == 'y' ]]; then
-          echo "输入域名"
-          read dom
-        else
-          echo -e "${Info}不自定义域名"
-        fi
-        dir='/web/ssl/auto/'$dom
+      echo "对接面板？"yn
+      if [[ $yn == 'y' ]]; then
+        read -p "输入证书域名:"dom
+        dir='/web/ssl/auto/'${dom}
       else
-        dir='/web/ssl/auto/'$dom
+        read -p "证书路径:(cer)" cerdir
+        read -p "私钥路径:(key)" keydir
+        cp $cerdir /web/ssl/${dom}/fullchain.cer
+        cp $keydir /web/ssl/${dom}/${dom}.key
+        dir='/web/ssl/'${dom}
       fi
     else
-      read -p "证书路径:(cer)" cerdir
-      read -p "私钥路径:(key)" keydir
-      cp $cerdir /web/ssl/$dom/fullchain.cer
-      cp $keydir /web/ssl/$dom/$dom.key
-      dir='/web/ssl/'$dom
+      echo -e "${Info} 使用 acme.sh 申请证书..."
+      add_ssl
+      ssl_config
     fi
   else
     docker restart nginx
-    add_ssl
   fi
-  ssl_config
-  docker restart nginx
 else
   docker restart nginx
 fi
 }
 
 add_ssl(){
-  ~/.acme.sh/acme.sh  --issue  -d $dom --webroot  /web/vhost/$dom
-  ~/.acme.sh/acme.sh --installcert  -d  $dom --key-file   /web/ssl/$dom/${dom}.key --fullchain-file /web/ssl/$dom/fullchain.cer
+  ~/.acme.sh/acme.sh  --issue  -d ${dom} --webroot  /web/vhost/${dom}
+  ~/.acme.sh/acme.sh --installcert  -d  ${dom} --key-file   /web/ssl/${dom}/${dom}.key --fullchain-file /web/ssl/${dom}/fullchain.cer
 }
 
 make_dir(){
   cd /web/vhost
-  mkdir $dom
-  mkdir /web/ssl/$dom
+  mkdir ${dom}
+  mkdir /web/ssl/${dom}
 }
 
 make_config(){
   cd /web/conf
-  touch $dom.conf
+  touch ${dom}.conf
   echo "server
       {
           listen 80;
@@ -289,12 +280,15 @@ ssl_config(){
 add_index(){
   cd /web/vhost/${dom}
   touch index.html
-  echo " ____  _   _ __  __ ____       _               _
-|  _ \| \ | |  \/  |  _ \     | |_   _____ ___| |__  _   _
-| | | |  \| | |\/| | |_) |____| \ \ / / __/ __| '_ \| | | |
-| |_| | |\  | |  | |  __/_____| |\ V / (__\__ \ | | | |_| |
-|____/|_| \_|_|  |_|_|        |_| \_/ \___|___/_| |_|\__,_|
-
+  echo " <html>
+  <body>
+ ____  _   _ __  __ ____       _               _<br>
+|  _ \| \ | |  \/  |  _ \     | |_   _____ ___| |__  _   _<br>
+| | | |  \| | |\/| | |_) |____| \ \ / / __/ __| '_ \| | | |<br>
+| |_| | |\  | |  | |  __/_____| |\ V / (__\__ \ | | | |_| |<br>
+|____/|_| \_|_|  |_|_|        |_| \_/ \___|___/_| |_|\__,_|<br>
+</body>
+</html>
 " > index.html
 }
 
@@ -313,9 +307,9 @@ del_vhost(){
 
 del_dom(){
   cd /web/vhost
-  rm $dom -rf
+  rm ${dom} -rf
   cd /web/conf
-  rm $dom.conf
+  rm ${dom}.conf
   docker restart nginx
 }
 
