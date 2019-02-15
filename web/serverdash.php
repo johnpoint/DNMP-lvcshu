@@ -29,43 +29,43 @@ if ( $vcode == 1) {
         echo '<td id='.$i.$j.'>'.$info['info'][$i]['ipv6'].'</td>';$j++;
         echo '<td id='.$i.$j.'>'.$info['info'][$i]['hostname'].'</td>';$j++;
         if($info['info'][$i]['nginx'] == '1'){
-            echo '<td item="nginx" class="service" id='.$i.$j.' bgcolor="green" ip='.$info['info'][$i]['ipv4'].'>运行</td>';$j++;
+            echo '<td item="nginx" class="service" id='.$i.$j.' bgcolor="green" ip='.$info['info'][$i]['ipv4'].'>running</td>';$j++;
         } elseif ($info['info'][$i]['nginx'] == '10') {
-            echo '<td item="nginx" class="service" id='.$i.$j.' bgcolor="yellow" ip='.$info['info'][$i]['ipv4'].'>关闭中</td>';$j++;
+            echo '<td item="nginx" class="service" id='.$i.$j.' bgcolor="yellow" ip='.$info['info'][$i]['ipv4'].'>close</td>';$j++;
         } elseif ($info['info'][$i]['nginx'] == '11') {
-            echo '<td item="nginx" class="service" id='.$i.$j.' bgcolor="yellow" ip='.$info['info'][$i]['ipv4'].'>开启中</td>';$j++;
+            echo '<td item="nginx" class="service" id='.$i.$j.' bgcolor="yellow" ip='.$info['info'][$i]['ipv4'].'>open</td>';$j++;
         } else {
-            echo '<td item="nginx" class="service" id='.$i.$j.' bgcolor="red" ip='.$info['info'][$i]['ipv4'].'>关闭</td>';$j++;
+            echo '<td item="nginx" class="service" id='.$i.$j.' bgcolor="red" ip='.$info['info'][$i]['ipv4'].'>deaded</td>';$j++;
         }
 
         if($info['info'][$i]['phpfpm'] == '1'){
-            echo '<td item="phpfpm" class="service" id='.$i.$j.' bgcolor="green" ip='.$info['info'][$i]['ipv4'].'>运行</td>';$j++;
+            echo '<td item="phpfpm" class="service" id='.$i.$j.' bgcolor="green" ip='.$info['info'][$i]['ipv4'].'>running</td>';$j++;
         } elseif ($info['info'][$i]['phpfpm'] == '10') {
-            echo '<td item="phpfpm" class="service" id='.$i.$j.' bgcolor="yellow" ip='.$info['info'][$i]['ipv4'].'>关闭中</td>';$j++;
+            echo '<td item="phpfpm" class="service" id='.$i.$j.' bgcolor="yellow" ip='.$info['info'][$i]['ipv4'].'>close</td>';$j++;
         } elseif ($info['info'][$i]['phpfpm'] == '11') {
-            echo '<td item="phpfpm" class="service" id='.$i.$j.' bgcolor="yellow" ip='.$info['info'][$i]['ipv4'].'>开启中</td>';$j++;
+            echo '<td item="phpfpm" class="service" id='.$i.$j.' bgcolor="yellow" ip='.$info['info'][$i]['ipv4'].'>open</td>';$j++;
         } else {
-            echo '<td item="phpfpm" class="service" id='.$i.$j.' bgcolor="red" ip='.$info['info'][$i]['ipv4'].'>关闭</td>';$j++;
+            echo '<td item="phpfpm" class="service" id='.$i.$j.' bgcolor="red" ip='.$info['info'][$i]['ipv4'].'>deaded</td>';$j++;
         }
 
         if($info['info'][$i]['mysql'] == '1'){
-            echo '<td item="mysql" class="service" id='.$i.$j.' bgcolor="green" ip='.$info['info'][$i]['ipv4'].'>运行</td>';$j++;
+            echo '<td item="mysql" class="service" id='.$i.$j.' bgcolor="green" ip='.$info['info'][$i]['ipv4'].'>running</td>';$j++;
         } elseif ($info['info'][$i]['mysql'] == '10') {
-            echo '<td item="mysql" class="service" id='.$i.$j.' bgcolor="yellow" ip='.$info['info'][$i]['ipv4'].'>关闭中</td>';$j++;
+            echo '<td item="mysql" class="service" id='.$i.$j.' bgcolor="yellow" ip='.$info['info'][$i]['ipv4'].'>close</td>';$j++;
         } elseif ($info['info'][$i]['mysql'] == '11') {
-            echo '<td item="mysql" class="service" id='.$i.$j.' bgcolor="yellow" ip='.$info['info'][$i]['ipv4'].'>开启中</td>';$j++;
+            echo '<td item="mysql" class="service" id='.$i.$j.' bgcolor="yellow" ip='.$info['info'][$i]['ipv4'].'>open</td>';$j++;
         } else {
-            echo '<td item="mysql" class="service" id='.$i.$j.' bgcolor="red" ip='.$info['info'][$i]['ipv4'].'>关闭</td>';$j++;
+            echo '<td item="mysql" class="service" id='.$i.$j.' bgcolor="red" ip='.$info['info'][$i]['ipv4'].'>deaded</td>';$j++;
         }
 
         if($info['info'][$i]['proxy'] == '1'){
-            echo '<td item="proxy" class="service" id='.$i.$j.' bgcolor="green" ip='.$info['info'][$i]['ipv4'].'>运行</td>';$j++;
+            echo '<td item="proxy" class="service" id='.$i.$j.' bgcolor="green" ip='.$info['info'][$i]['ipv4'].'>running</td>';$j++;
         } elseif ($info['info'][$i]['proxy'] == '10') {
-            echo '<td item="proxy" class="service" id='.$i.$j.' bgcolor="yellow" ip='.$info['info'][$i]['ipv4'].'>关闭中</td>';$j++;
+            echo '<td item="proxy" class="service" id='.$i.$j.' bgcolor="yellow" ip='.$info['info'][$i]['ipv4'].'>close</td>';$j++;
         } elseif ($info['info'][$i]['proxy'] == '11') {
-            echo '<td item="proxy" class="service" id='.$i.$j.' bgcolor="yellow" ip='.$info['info'][$i]['ipv4'].'>开启中</td>';$j++;
+            echo '<td item="proxy" class="service" id='.$i.$j.' bgcolor="yellow" ip='.$info['info'][$i]['ipv4'].'>open</td>';$j++;
         } else {
-            echo '<td item="proxy" class="service" id='.$i.$j.' bgcolor="red" ip='.$info['info'][$i]['ipv4'].'>关闭</td>';$j++;
+            echo '<td item="proxy" class="service" id='.$i.$j.' bgcolor="red" ip='.$info['info'][$i]['ipv4'].'>deaded</td>';$j++;
         }
     }
     echo '</tbody>
@@ -88,7 +88,7 @@ setTimeout('myrefresh()',5000);
                 data: {do:'repo',ipv4:this.attributes['4'].nodeValue,key:this.attributes['0'].nodeValue,value:'10',secret:document.getElementById('nonediv').innerHTML},
                 success: function () {
                     hitpoint.bgColor='yellow';
-                    hitpoint.innerHTML='关闭中';
+                    hitpoint.innerHTML='close';
                     location.reload();
                 }
             });
@@ -99,7 +99,7 @@ setTimeout('myrefresh()',5000);
                 data: {do:'repo',ipv4:this.attributes['4'].nodeValue,key:this.attributes['0'].nodeValue,value:'11',secret:document.getElementById('nonediv').innerHTML},
                 success: function () {
                     hitpoint.bgColor='yellow';
-                    hitpoint.innerHTML='开启中';
+                    hitpoint.innerHTML='open';
                     location.reload();
                 }
             });

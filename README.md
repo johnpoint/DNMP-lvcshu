@@ -5,7 +5,7 @@
 ## 执行脚本
 
 ```
-wget https://raw.githubusercontent.com/johnpoint/DNMP-lvcshu/master/DNMP && bash DNMP install && soure ~/.bashrc
+wget https://raw.githubusercontent.com/johnpoint/DNMP-lvcshu/master/DNMP && bash DNMP install && source ~/.bashrc
 ```
 
 **注意:脚本执行完毕后 MYSQL 默认密码 DNMP-lvcshu ,请及时修改**

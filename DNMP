@@ -1,6 +1,6 @@
 #!/bin/bash
 
-ver='2.2.0'
+ver='2.2.1'
 Green_font_prefix="\033[32m" && Red_font_prefix="\033[31m" && Green_background_prefix="\033[42;37m" && Red_background_prefix="\033[41;37m" && Font_color_suffix="\033[0m"
 Info="${Green_font_prefix}[信息]${Font_color_suffix}"
 Error="${Red_font_prefix}[错误]${Font_color_suffix}"
@@ -42,37 +42,47 @@ install(){
 |____/|_| \_|_|  |_|_|        |_| \_/ \___|___/_| |_|\__,_|
 
 "
-  echo "输入api key:"
-  read -p ">>" key
-  echo "面板 api 地址(不带https://):"
-  read -p ">>" url
-  echo "输入服务器别名(实时监控)"
-  read -p ">>" user
-  echo "输入实时监控服务器密钥"
-  read -p ">>" pass
+  echo "对接面板？(y/n)"
+  read -p ">>" pairyn
+  if [[ $pairyn == 'y' ]]; then
+    echo "输入api key:"
+    read -p ">>" key
+    echo "面板 api 地址(不带https://)"
+    read -p ">>" url
+    echo "输入服务器别名(实时监控)"
+    read -p ">>" user
+    echo "输入实时监控服务器密钥"
+    read -p ">>" pass
+  else
+    echo -e "${Info} 不对接面板..."
+  fi
   $PM update -y
   $PM upgrade
-  $PM install curl unzip jq -y
+  $PM install curl unzip jq python -y
   curl -fsSL get.docker.com -o get-docker.sh
   sh get-docker.sh --mirror Aliyun
   systemctl enable docker
   systemctl start docker
   curl -L https://github.com/docker/compose/releases/download/1.19.0/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
   chmod +x /usr/local/bin/docker-compose
+  mv DNMP .DNMP
+  chmod +x .DNMP
   mkdir /web/vhost /web/conf /web/ssl/auto /web/mysql/data DNMP/shell -p
   curl  https://get.acme.sh | sh
-  wget https://git.lvcshu.com/johnpoint/DNMP-lvcshu/raw/master/docker-compose.yml
+  wget https://raw.githubusercontent.com/johnpoint/DNMP-lvcshu/master/docker-compose.yml
   docker-compose up -d
-  curl "https://${url}/api.php?do=reg&secret=${key}&ip=$(curl ip.sb -4)&hostname=$(hostname)&ipv6=$(curl ip.sb -6)"
-  curl https://getcaddy.com | bash -s personal http.filebrowser
-  mv DNMP .DNMP
-  chmod +x .DNMP 
-  cd DNMP/shell 
-  wget https://raw.githubusercontent.com/johnpoint/DNMP-lvcshu/master/shell/checkalive.sh
-  wget https://raw.githubusercontent.com/johnpoint/DNMP-lvcshu/master/shell/update-cer.sh
-  wget https://raw.githubusercontent.com/johnpoint/DNMP-lvcshu/master/status/client/client.py
-  wget https://raw.githubusercontent.com/johnpoint/DNMP-lvcshu/master/status/client/client.sh
-  nohup python client.py ${url} ${user} ${pass} &
+  if [[ $pairyn == 'y' ]]; then
+    cd DNMP/shell 
+    curl "https://${url}/api.php?do=reg&secret=${key}&ip=$(curl ip.sb -4)&hostname=$(hostname)&ipv6=$(curl ip.sb -6)"
+    wget https://raw.githubusercontent.com/johnpoint/DNMP-lvcshu/master/shell/checkalive.sh
+    wget https://raw.githubusercontent.com/johnpoint/DNMP-lvcshu/master/shell/update-cer.sh
+    wget https://raw.githubusercontent.com/johnpoint/DNMP-lvcshu/master/status/client/client.py
+    wget https://raw.githubusercontent.com/johnpoint/DNMP-lvcshu/master/status/client/client.sh
+    nohup python client.py ${url} ${user} ${pass} > status.out 2>&1 &
+    nohup bash checkalive.sh ${url} ${key} > poll.out 2>&1 &
+  else
+    echo -e "${Info} 不对接面板..."
+  fi
   echo "alias DNMP=~/.DNMP" >> ~/.bashrc
 }
 
