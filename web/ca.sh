@@ -1,5 +1,7 @@
 #!/bin/sh
 
+rm data/* -rf
+
 cat urlfile.list | while read line
 do
   touch "data/$line"
