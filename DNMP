@@ -1,6 +1,6 @@
 #!/bin/bash
 
-ver='2.1.9'
+ver='2.2.0'
 Green_font_prefix="\033[32m" && Red_font_prefix="\033[31m" && Green_background_prefix="\033[42;37m" && Red_background_prefix="\033[41;37m" && Font_color_suffix="\033[0m"
 Info="${Green_font_prefix}[信息]${Font_color_suffix}"
 Error="${Red_font_prefix}[错误]${Font_color_suffix}"
@@ -44,8 +44,12 @@ install(){
 "
   echo "输入api key:"
   read -p ">>" key
-  echo "url(不带https://):"
+  echo "面板 api 地址(不带https://):"
   read -p ">>" url
+  echo "输入服务器别名(实时监控)"
+  read -p ">>" user
+  echo "输入实时监控服务器密钥"
+  read -p ">>" pass
   $PM update -y
   $PM upgrade
   $PM install curl unzip jq -y
@@ -66,6 +70,9 @@ install(){
   cd DNMP/shell 
   wget https://raw.githubusercontent.com/johnpoint/DNMP-lvcshu/master/shell/checkalive.sh
   wget https://raw.githubusercontent.com/johnpoint/DNMP-lvcshu/master/shell/update-cer.sh
+  wget https://raw.githubusercontent.com/johnpoint/DNMP-lvcshu/master/status/client/client.py
+  wget https://raw.githubusercontent.com/johnpoint/DNMP-lvcshu/master/status/client/client.sh
+  nohup python client.py ${url} ${user} ${pass} &
   echo "alias DNMP=~/.DNMP" >> ~/.bashrc
 }
 

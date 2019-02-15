@@ -1,10 +1,12 @@
 #!/usr/bin/env python2
 # -*- coding: utf-8 -*-
 
-SERVER = ""
+import sys
+
+SERVER = sys.argv[1]
 PORT = 35601
-USER = ""
-PASSWORD = "1234"
+USER = sys.argv[2]
+PASSWORD = sys.argv[3]
 INTERVAL = 1 # Update interval
 
 

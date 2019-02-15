@@ -1,9 +1,9 @@
 #!/bin/bash
 
-SERVER="status.botox.bz"
+SERVER=$1
 PORT=35601
-USER="s01"
-PASSWORD="1234"
+USER=$2
+PASSWORD=$3
 INTERVAL=1 # Update interval
 
 
