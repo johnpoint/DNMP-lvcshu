@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/bin/bash
 url=$1
 secret=$2
 ipv4=$(curl -q ip.sb -4)
