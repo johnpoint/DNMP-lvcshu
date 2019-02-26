@@ -1,6 +1,6 @@
 #!/bin/bash
 
-ver='2.3.0'
+ver='2.3.1'
 Green_font_prefix="\033[32m" && Red_font_prefix="\033[31m" && Green_background_prefix="\033[42;37m" && Red_background_prefix="\033[41;37m" && Font_color_suffix="\033[0m"
 Info="${Green_font_prefix}[信息]${Font_color_suffix}"
 Error="${Red_font_prefix}[错误]${Font_color_suffix}"
@@ -76,8 +76,8 @@ install(){
     curl "https://${url}/api.php?do=reg&secret=${key}&ip=$(curl ip.sb -4)&hostname=$(hostname)&ipv6=$(curl ip.sb -6)"
     wget https://raw.githubusercontent.com/johnpoint/DNMP-lvcshu/master/shell/checkalive.sh
     wget https://raw.githubusercontent.com/johnpoint/DNMP-lvcshu/master/shell/update-cer.sh
-    wget https://raw.githubusercontent.com/johnpoint/DNMP-lvcshu/master/status/client/client.py
-    wget https://raw.githubusercontent.com/johnpoint/DNMP-lvcshu/master/status/client/client.sh
+    wget https://raw.githubusercontent.com/johnpoint/DNMP-dashboard/master/client/client.py
+    wget https://raw.githubusercontent.com/johnpoint/DNMP-dashboard/master/client/client.sh
     nohup python client.py ${url} ${user} ${pass} > status.out 2>&1 &
     nohup bash checkalive.sh ${url} ${key} > poll.out 2>&1 &
     cd ../
@@ -86,6 +86,7 @@ install(){
     echo -e "${Info}添加 CRON 任务..."
     echo "0 0 * * * /bin/bash /root/DNMP/shell/update-cer.sh" >> crontab.file
     crontab crontab.file
+    rm crontab.file
   else
     echo -e "${Info} 不对接面板..."
   fi
