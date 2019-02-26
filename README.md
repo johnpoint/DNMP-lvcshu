@@ -17,7 +17,7 @@ wget https://raw.githubusercontent.com/johnpoint/DNMP-lvcshu/master/DNMP && bash
 | 类型 | 名称 | 版本 | 对外端口 |
 | --- | --- | --- | --- | --- |
 |docker| [nginx-lvcshu](https://cloud.docker.com/u/johnpoint/repository/docker/johnpoint/nginx-lvcshu) | nginx:lastest | 80 / 443 |
- docker|[php-lvcshu](https://cloud.docker.com/u/johnpoint/repository/docker/johnpoint/php-lvcshu) | php 7.2 | / |
+|docker|[php-lvcshu](https://cloud.docker.com/u/johnpoint/repository/docker/johnpoint/php-lvcshu) | php 7.2 | / |
 |docker|[mysql:5.7.23](https://hub.docker.com/_/mysql/scans/library/mysql/5.7.23)|mysql:5.7.23|/|
 
 ## 脚本生成 nginx 配置文件
