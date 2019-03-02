@@ -1,6 +1,6 @@
 #!/bin/bash
 
-ver='2.3.1'
+ver='2.3.2'
 Green_font_prefix="\033[32m" && Red_font_prefix="\033[31m" && Green_background_prefix="\033[42;37m" && Red_background_prefix="\033[41;37m" && Font_color_suffix="\033[0m"
 Info="${Green_font_prefix}[信息]${Font_color_suffix}"
 Error="${Red_font_prefix}[错误]${Font_color_suffix}"
@@ -108,7 +108,7 @@ install_phpmyadmin(){
     cd /web/vhost/${dom}/phpmyadmin
     mkdir tmp
     chmod 777 tmp -R
-    wget https://git.lvcshu.com/johnpoint/DNMP-lvcshu/raw/master/config.inc.php
+    wget https://github.com/johnpoint/DNMP-lvcshu/raw/master/config.inc.php
   else
     echo -e "${Error}没有输入域名"
     exit
