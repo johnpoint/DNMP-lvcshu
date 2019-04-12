@@ -84,8 +84,8 @@ while((1));do
     fi
 
     #proxy
-    proxyCENT=`cat data.json |jq -r .info[0].proxy`
-    proxy=$(docker ps|grep proxy)
+    proxyCENT=`cat data.json |jq -r .info[0].update`
+    proxy=$(docker ps|grep update)
     if [[ ! $proxy ]]; then
         if [[ ${proxyCENT} == '1' ]]; then
             curl -q 'https://'${url}'/api.php?do=repo&ipv4='${ipv4}'&secret='${secret}'&key=proxy&value=0'
