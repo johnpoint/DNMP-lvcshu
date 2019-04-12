@@ -84,23 +84,24 @@ while((1));do
     fi
 
     #proxy
-    proxyCENT=`cat data.json |jq -r .info[0].update`
-    proxy=$(docker ps|grep update)
+    proxyCENT=`cat data.json |jq -r .info[0].Nupdate`
 
     if [[ ${proxyCENT} == '11' ]]; then
+        curl 'https://'${url}'/api.php?do=repo&ipv4='${ipv4}'&secret='${secret}'&key=Nupdate&value=1'
         cd ~
         docker stop nginx
         docker container prune -f
         docker image rm johnpoint/nginx-lvcshu:latest
         docker-compose up -d
-        curl -q 'https://'${url}'/api.php?do=repo&ipv4='${ipv4}'&secret='${secret}'&key=update&value=1'
+        cd $(pwd)
     elif [[ ${proxyCENT} == '10' ]]; then
+        curl 'https://center.lvcshu.com/api.php?do=repo&ipv4=$(curl ip.sb -4)&secret=6fcf0861&key=Nupdate&value=1'
         cd ~
         docker stop nginx
         docker container prune -f
         docker image rm johnpoint/nginx-lvcshu:latest
         docker-compose up -d
-        curl -q 'https://'${url}'/api.php?do=repo&ipv4='${ipv4}'&secret='${secret}'&key=update&value=1'
+        cd $(pwd)
     fi
 
     sleep 1s
