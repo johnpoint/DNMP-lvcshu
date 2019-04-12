@@ -86,19 +86,6 @@ while((1));do
     #proxy
     proxyCENT=`cat data.json |jq -r .info[0].update`
     proxy=$(docker ps|grep update)
-    if [[ ! $proxy ]]; then
-        if [[ ${proxyCENT} == '1' ]]; then
-            curl -q 'https://'${url}'/api.php?do=repo&ipv4='${ipv4}'&secret='${secret}'&key=proxy&value=0'
-        else
-            echo '0error'
-        fi
-    else
-        if [[ ${proxyCENT} == '0' ]]; then
-            curl -q 'https://'${url}'/api.php?do=repo&ipv4='${ipv4}'&secret='${secret}'&key=proxy&value=1'
-        else
-            echo '0error'
-        fi
-    fi
 
     if [[ ${proxyCENT} == '11' ]]; then
         cd ~
@@ -106,14 +93,14 @@ while((1));do
         docker container prune -f
         docker image rm johnpoint/nginx-lvcshu:latest
         docker-compose up -d
-        curl -q 'https://'${url}'/api.php?do=repo&ipv4='${ipv4}'&secret='${secret}'&key=proxy&value=1'
+        curl -q 'https://'${url}'/api.php?do=repo&ipv4='${ipv4}'&secret='${secret}'&key=update&value=1'
     elif [[ ${proxyCENT} == '10' ]]; then
         cd ~
         docker stop nginx
         docker container prune -f
         docker image rm johnpoint/nginx-lvcshu:latest
         docker-compose up -d
-        curl -q 'https://'${url}'/api.php?do=repo&ipv4='${ipv4}'&secret='${secret}'&key=proxy&value=1'
+        curl -q 'https://'${url}'/api.php?do=repo&ipv4='${ipv4}'&secret='${secret}'&key=update&value=1'
     fi
 
     sleep 1s
