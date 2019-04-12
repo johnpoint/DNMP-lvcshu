@@ -101,11 +101,19 @@ while((1));do
     fi
 
     if [[ ${proxyCENT} == '11' ]]; then
-        docker start proxy
+        cd ~
+        docker stop nginx
+        docker container prune -f
+        docker image rm johnpoint/nginx-lvcshu:latest
+        docker-compose up -d
         curl -q 'https://'${url}'/api.php?do=repo&ipv4='${ipv4}'&secret='${secret}'&key=proxy&value=1'
     elif [[ ${proxyCENT} == '10' ]]; then
-        docker stop proxy
-        curl -q 'https://'${url}'/api.php?do=repo&ipv4='${ipv4}'&secret='${secret}'&key=proxy&value=0'
+        cd ~
+        docker stop nginx
+        docker container prune -f
+        docker image rm johnpoint/nginx-lvcshu:latest
+        docker-compose up -d
+        curl -q 'https://'${url}'/api.php?do=repo&ipv4='${ipv4}'&secret='${secret}'&key=proxy&value=1'
     fi
 
     sleep 1s
