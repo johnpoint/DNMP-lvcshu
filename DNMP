@@ -1,6 +1,6 @@
 #!/bin/bash
 
-ver='2.3.3'
+ver='2.4.0'
 Green_font_prefix="\033[32m" && Red_font_prefix="\033[31m" && Green_background_prefix="\033[42;37m" && Red_background_prefix="\033[41;37m" && Font_color_suffix="\033[0m"
 Info="${Green_font_prefix}[信息]${Font_color_suffix}"
 Error="${Red_font_prefix}[错误]${Font_color_suffix}"
@@ -131,6 +131,7 @@ if [[ ! -z ${dom} ]];then
         echo "输入证书域名"
         read -p ">>" ddom
         dir='/web/ssl/auto/'${ddom}
+        mkdir $dir
       else
         echo "证书路径:(cer)"
         read -p ">>" cerdir
@@ -387,6 +388,12 @@ if [[ ! -z $1  ]]; then
     echo -e "${Error}无法识别的参数(install?)"
     exit
   fi
+elif [[ $1 = 'h' ]]; then
+  echo "帮助信息:"
+  echo "DNMP vhost [ add | del | ls ]"
+  echo "DNMP [ nginx | php | mysql ] [ start | stop | restart ]"
+  echo "DNMP ssl add"
+  echo "DNMP insatll"
 else
   echo -e "${Error}没有参数"
   exit
