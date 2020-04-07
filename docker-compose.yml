@@ -13,6 +13,14 @@ services:
       - /web/vhost:/web/vhost
       - /web/conf:/etc/nginx/conf.d
       - /web/ssl:/web/ssl
+      
+  php-fpm:
+    image:                 johnpoint/php-lvcshu:latest
+    container_name:        php-fpm
+    networks:
+      - site-lvcshu
+    volumes:
+      - /web/vhost:/web/vhost
  
   mysql:
     image:                 mysql:5.7.23
